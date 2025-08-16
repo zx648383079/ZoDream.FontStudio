@@ -1,0 +1,19 @@
+﻿namespace ZoDream.Shared.WebType
+{
+    public class WOFFTableEntry
+    {
+        public uint Tag;
+        public uint Offset;
+        public uint CompLength;
+        public uint OrigLength;
+        public uint OrigChecksum;
+        public string Name { get; set; }
+        public long ExpectedStartAt { get; set; }
+        /// <summary>
+        /// woff2
+        /// </summary>
+        public byte PreprocessingTransformation { get; set; }
+
+        public uint TransformLength { get; set; }
+    }
+}

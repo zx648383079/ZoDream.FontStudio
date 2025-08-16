@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ZoDream.FontStudio (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ZoDream.FontStudio (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
