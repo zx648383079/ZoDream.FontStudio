@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class ColorBitmapDataTable : TableEntry
+    public class ColorBitmapDataTable : ITypefaceTable
     {
         public const string TableName = "CBDT";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

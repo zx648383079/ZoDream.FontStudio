@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class LinearThresholdTable : TableEntry
+    public class LinearThresholdTable : ITypefaceTable
     {
         public const string TableName = "LTSH";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

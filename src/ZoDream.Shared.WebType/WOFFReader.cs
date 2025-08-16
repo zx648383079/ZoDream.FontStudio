@@ -22,18 +22,26 @@ namespace ZoDream.Shared.WebType
             Debug.Assert(buffer.SequenceEqual(Signature));
             var header = ReadHeader();
             var entries = ReadEntry(header).ToArray();
+            var res = new Typeface();
             foreach (var item in entries)
             {
                 var source = new PartialStream(reader.BaseStream, item.Offset, item.CompLength);
+                Stream target;
                 if (item.OrigLength == item.CompLength)
                 {
                     // 没加密
+                    target = source;
                 }
                 else
                 {
-                    new DeflateStream(source, CompressionMode.Decompress);
+                    target = new DeflateStream(source, CompressionMode.Decompress);
                 }
+                // 解 table
             }
+            return new TypefaceCollection
+            {
+                res
+            };
         }
 
         private IEnumerable<WOFFTableEntry> ReadEntry(WOFFFileHeader header)
@@ -43,7 +51,7 @@ namespace ZoDream.Shared.WebType
             {
                 var entry = new WOFFTableEntry()
                 {
-                    Tag = reader.ReadUInt32(),
+                    Name = reader.ReadString(4),
                     Offset = reader.ReadUInt32(),
                     CompLength = reader.ReadUInt32(),
                     OrigLength = reader.ReadUInt32(),

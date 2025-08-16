@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class GlyphLocationsTable : TableEntry
+    public class GlyphLocationsTable : ITypefaceTable
     {
         public const string TableName = "loca";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

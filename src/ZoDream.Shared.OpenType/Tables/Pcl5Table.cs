@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class Pcl5Table : TableEntry
+    public class Pcl5Table : ITypefaceTable
     {
         public const string TableName = "PCLT";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

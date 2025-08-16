@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class HorizontalDeviceMetricsTable : TableEntry
+    public class HorizontalDeviceMetricsTable : ITypefaceTable
     {
         public const string TableName = "hdmx";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

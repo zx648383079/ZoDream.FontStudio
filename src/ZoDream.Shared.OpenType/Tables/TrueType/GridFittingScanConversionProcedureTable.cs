@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class GridFittingScanConversionProcedureTable : TableEntry
+    public class GridFittingScanConversionProcedureTable : ITypefaceTable
     {
         public const string TableName = "gasp";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class JustificationTable : TableEntry
+    public class JustificationTable : ITypefaceTable
     {
         public const string TableName = "JSTF";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using ZoDream.Shared.Font;
 using ZoDream.Shared.IO;
+using ZoDream.Shared.OpenType.Tables;
 
 namespace ZoDream.Shared.WebType
 {
@@ -22,10 +23,15 @@ namespace ZoDream.Shared.WebType
         {
             var buffer = reader.ReadBytes(Signature.Length);
             Debug.Assert(buffer.SequenceEqual(Signature));
+            var res = new Typeface();
             var header = ReadHeader();
             var entries = ReadEntry(header).ToArray();
             new BrotliStream(new PartialStream(reader.BaseStream, header.TotalCompressedSize), 
                 CompressionMode.Decompress);
+            return new TypefaceCollection
+            {
+                res
+            };
         }
 
         private IEnumerable<WOFFTableEntry> ReadEntry(WOFFFileHeader header)
@@ -37,16 +43,17 @@ namespace ZoDream.Shared.WebType
                 var knowTable = flags & 0x1F;
                 var entry = new WOFFTableEntry()
                 {
-                    Name = (knowTable < 63) ? _knownTableTags[knowTable] : Encoding.UTF8.GetString(reader.ReadBytes(4)),
+                    Name = (knowTable < 63) ? _knownTableTags[knowTable] : reader.ReadString(4),
                     PreprocessingTransformation = (byte)((flags >> 5) & 0x3),
                     ExpectedStartAt = expectedStartAt,
                     OrigLength = reader.Read7BitEncodedUInt(),
                 };
-                if (entry.PreprocessingTransformation == 0 && entry.Name is Glyf._N or GlyphLocations._N)
+                if (entry.PreprocessingTransformation == 0 && entry.Name is GlyphDataTable.TableName or GlyphLocationsTable.TableName)
                 {
                     entry.TransformLength = reader.Read7BitEncodedUInt();
                     expectedStartAt += entry.TransformLength;
-                }   else
+                }
+                else
                 {
                     expectedStartAt += entry.OrigLength;
                 }

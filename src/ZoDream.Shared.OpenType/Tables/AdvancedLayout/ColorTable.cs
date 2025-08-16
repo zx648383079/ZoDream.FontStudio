@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class ColorTable : TableEntry
+    public class ColorTable : ITypefaceTable
     {
         public const string TableName = "COLR";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

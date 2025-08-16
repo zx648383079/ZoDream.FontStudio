@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class StyleAttributesTable : TableEntry
+    public class StyleAttributesTable : ITypefaceTable
     {
         public const string TableName = "STAT";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

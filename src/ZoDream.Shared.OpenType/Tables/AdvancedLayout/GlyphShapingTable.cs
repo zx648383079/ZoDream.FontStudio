@@ -2,7 +2,7 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public abstract class GlyphShapingTable : TableEntry
+    public abstract class GlyphShapingTable : ITypefaceTable
     {
     }
 }

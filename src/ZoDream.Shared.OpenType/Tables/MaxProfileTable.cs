@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class MaxProfileTable : TableEntry
+    public class MaxProfileTable : ITypefaceTable
     {
         public const string TableName = "maxp";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

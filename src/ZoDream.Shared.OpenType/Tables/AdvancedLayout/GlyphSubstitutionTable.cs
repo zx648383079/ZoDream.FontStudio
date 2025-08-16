@@ -4,6 +4,6 @@
     {
         public const string TableName = "GSUB";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

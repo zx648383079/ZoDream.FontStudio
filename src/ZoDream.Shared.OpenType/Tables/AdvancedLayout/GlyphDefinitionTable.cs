@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class GlyphDefinitionTable : TableEntry
+    public class GlyphDefinitionTable : ITypefaceTable
     {
         public const string TableName = "GDEF";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class AxisVariationsTable : TableEntry
+    public class AxisVariationsTable : ITypefaceTable
     {
         public const string TableName = "avar";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

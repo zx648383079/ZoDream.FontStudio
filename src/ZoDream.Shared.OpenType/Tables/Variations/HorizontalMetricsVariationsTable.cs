@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class HorizontalMetricsVariationsTable : TableEntry
+    public class HorizontalMetricsVariationsTable : ITypefaceTable
     {
         public const string TableName = "HVAR";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class MergeTable : TableEntry
+    public class MergeTable : ITypefaceTable
     {
         public const string TableName = "MERG";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

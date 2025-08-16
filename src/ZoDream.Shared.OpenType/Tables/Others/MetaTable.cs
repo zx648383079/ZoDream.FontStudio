@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class MetaTable : TableEntry
+    public class MetaTable : ITypefaceTable
     {
         public const string TableName = "Meta";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZoDream.Shared.Font
 {
@@ -15,8 +11,7 @@ namespace ZoDream.Shared.Font
         public void TryGet(char character, [NotNullWhen(true)] Glyph? result);
     }
 
-    public interface ITypefaceCollection : IEnumerable<ITypeface>
+    public interface ITypefaceCollection : ICollection<ITypeface>, IEnumerable<ITypeface>
     {
-        public int Count { get; }
     }
 }

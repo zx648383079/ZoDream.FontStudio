@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class CVTVariationsTable : TableEntry
+    public class CVTVariationsTable : ITypefaceTable
     {
         public const string TableName = "cvar";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

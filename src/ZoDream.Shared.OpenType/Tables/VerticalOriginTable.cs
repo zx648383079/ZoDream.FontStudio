@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class VerticalOriginTable : TableEntry
+    public class VerticalOriginTable : ITypefaceTable
     {
         public const string TableName = "VORG";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class VerticalMetricsVariationsTable : TableEntry
+    public class VerticalMetricsVariationsTable : ITypefaceTable
     {
         public const string TableName = "VVAR";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

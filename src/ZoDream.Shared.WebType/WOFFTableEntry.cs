@@ -1,13 +1,15 @@
-﻿namespace ZoDream.Shared.WebType
+﻿using ZoDream.Shared.Font;
+
+namespace ZoDream.Shared.WebType
 {
-    public class WOFFTableEntry
+    public class WOFFTableEntry : ITypefaceTableEntry
     {
-        public uint Tag;
+        public string Name { get; set; }
         public uint Offset;
         public uint CompLength;
         public uint OrigLength;
         public uint OrigChecksum;
-        public string Name { get; set; }
+
         public long ExpectedStartAt { get; set; }
         /// <summary>
         /// woff2

@@ -27,7 +27,7 @@ namespace ZoDream.Shared.WebType
             //-------------------------------------------------------------------
 
             //-- TODO:implement missing table too!
-            CmapTable.TableName, //0
+            CharacterGlyphMappingTable.TableName, //0
             HeadTable.TableName, //1
             HorizontalHeaderTable.TableName,//2
             HorizontalMetricsTable.TableName,//3

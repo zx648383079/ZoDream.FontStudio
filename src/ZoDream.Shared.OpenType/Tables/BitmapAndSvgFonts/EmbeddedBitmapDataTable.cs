@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class EmbeddedBitmapDataTable : TableEntry
+    public class EmbeddedBitmapDataTable : ITypefaceTable
     {
         public const string TableName = "EBDT";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

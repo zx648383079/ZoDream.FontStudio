@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class FontProgramTable : TableEntry
+    public class FontProgramTable : ITypefaceTable
     {
         public const string TableName = "fpgm";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

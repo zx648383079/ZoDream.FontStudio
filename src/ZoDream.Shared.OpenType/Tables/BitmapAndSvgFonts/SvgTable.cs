@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class SvgTable : TableEntry
+    public class SvgTable : ITypefaceTable
     {
         public const string TableName = "SVG ";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

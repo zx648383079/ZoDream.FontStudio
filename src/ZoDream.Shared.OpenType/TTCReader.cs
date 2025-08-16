@@ -22,6 +22,14 @@ namespace ZoDream.Shared.OpenType
             var buffer = reader.ReadBytes(Signature.Length);
             Debug.Assert(buffer.SequenceEqual(Signature));
             var header = ReadHeader();
+            var res = new TypefaceCollection();
+            var ttf = new TTFReader(reader);
+            foreach (var offset in header.OffsetTables)
+            {
+                reader.Position = offset;
+                res.Add(ttf.ReadTypeface());
+            }
+            return res;
         }
 
         private TTCFileHeader ReadHeader()

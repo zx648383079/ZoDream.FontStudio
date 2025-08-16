@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class StandardBitmapGraphicsTable : TableEntry
+    public class StandardBitmapGraphicsTable : ITypefaceTable
     {
         public const string TableName = "sbix";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class MathTable : TableEntry
+    public class MathTable : ITypefaceTable
     {
         public const string TableName = "MATH";
 
-        public override string Name => TableName;
+        public string Name => TableName;
     }
 }
