@@ -7,5 +7,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "cvt ";
 
         public string Name => TableName;
+
+        public short[] ControlValues { get; set; }
     }
 }

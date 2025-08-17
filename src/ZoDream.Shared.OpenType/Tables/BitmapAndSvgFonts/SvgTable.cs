@@ -1,4 +1,5 @@
-﻿using ZoDream.Shared.Font;
+﻿using System.IO;
+using ZoDream.Shared.Font;
 
 namespace ZoDream.Shared.OpenType.Tables
 {
@@ -7,5 +8,18 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "SVG ";
 
         public string Name => TableName;
+
+        public SvgDocument[] Bodies { get; set; }
+    }
+
+    public class SvgDocument
+    {
+        public ushort StartGlyphID;
+        public ushort EndGlyphID;
+        public uint SvgDocOffset;
+        public uint SvgDocLength;
+
+        public Stream Buffer;
+        public bool Compressed;
     }
 }

@@ -5,7 +5,7 @@ namespace ZoDream.Shared.OpenType
 {
     public class OTFReader(EndianReader reader) : TTFReader(reader)
     {
-        public OTFReader(Stream input) : this(new EndianReader(input, EndianType.BigEndian))
+        public OTFReader(Stream input) : this(new EndianReader(input, EndianType.BigEndian, false))
         {
 
         }

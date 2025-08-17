@@ -17,5 +17,9 @@ namespace ZoDream.Shared.WebType
         public byte PreprocessingTransformation { get; set; }
 
         public uint TransformLength { get; set; }
+
+        long ITypefaceTableEntry.Offset => throw new System.NotImplementedException();
+
+        public long Length => throw new System.NotImplementedException();
     }
 }

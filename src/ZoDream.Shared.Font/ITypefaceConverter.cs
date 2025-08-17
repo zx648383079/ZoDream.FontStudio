@@ -25,6 +25,8 @@ namespace ZoDream.Shared.Font
         public void Write(EndianWriter writer, T data, Type objectType, ITypefaceSerializer serializer);
     }
 
+
+
     public interface ITypefaceSerializer
     {
         /// <summary>
@@ -38,4 +40,6 @@ namespace ZoDream.Shared.Font
         public void Serialize<T>(EndianWriter writer, T data);
         public void Serialize(EndianWriter writer, object data, Type objectType);
     }
+
+
 }

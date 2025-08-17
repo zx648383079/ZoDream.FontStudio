@@ -1,4 +1,5 @@
-﻿using ZoDream.Shared.Font;
+﻿using System.IO;
+using ZoDream.Shared.Font;
 
 namespace ZoDream.Shared.OpenType.Tables
 {
@@ -7,5 +8,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "fpgm";
 
         public string Name => TableName;
+
+        public Stream Buffer { get; set; }
     }
 }

@@ -33,4 +33,27 @@ namespace ZoDream.Shared.Font
             return Read(reader, objectType, serializer);
         }
     }
+
+    public abstract class TypefaceTableConverter<T> : ITypefaceTableConverter<T>
+        where T : ITypefaceTable
+    {
+        public bool CanConvert(Type objectType)
+        {
+            return typeof(T).IsAssignableFrom(objectType);
+        }
+
+        public abstract T? Read(EndianReader reader, ITypefaceTableEntry entry, ITypefaceTableSerializer serializer);
+
+        public virtual object? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public abstract void Write(EndianWriter writer, T data);
+
+        public void Write(EndianWriter writer, object data, Type objectType, ITypefaceSerializer serializer)
+        {
+            Write(writer, (T)data);
+        }
+    }
 }

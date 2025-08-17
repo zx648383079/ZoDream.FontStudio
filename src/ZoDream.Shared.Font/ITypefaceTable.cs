@@ -6,6 +6,9 @@ namespace ZoDream.Shared.Font
     public interface ITypefaceTableEntry
     {
         public string Name { get; }
+
+        public long Offset { get; }
+        public long Length { get; }
     }
 
     public interface ITypefaceTable
@@ -13,28 +16,14 @@ namespace ZoDream.Shared.Font
         public string Name { get; }
     }
 
-    public interface ITableCollection : IEnumerable<ITypefaceTable>
+    public interface IUnreadTypefaceTable : ITypefaceTable
     {
-
-        public void Add(ITypefaceTable table);
-        public bool TryGet(string name, [NotNullWhen(true)] out ITypefaceTable? res);
+        public ITypefaceTableEntry Entry { get; }
     }
 
-    public class TableCollection : Dictionary<string, ITypefaceTable>, ITableCollection
+    public interface ITypefaceTableCollection : IEnumerable<ITypefaceTable>
     {
-        public void Add(ITypefaceTable table)
-        {
-            Add(table.Name, table);
-        }
-
-        public bool TryGet(string name, [NotNullWhen(true)] out ITypefaceTable? res)
-        {
-            return TryGetValue(name, out res);
-        }
-
-        IEnumerator<ITypefaceTable> IEnumerable<ITypefaceTable>.GetEnumerator()
-        {
-            return Values.GetEnumerator();
-        }
+        public void Add(ITypefaceTable table);
+        public bool TryGet(string name, [NotNullWhen(true)] out ITypefaceTable? res);
     }
 }

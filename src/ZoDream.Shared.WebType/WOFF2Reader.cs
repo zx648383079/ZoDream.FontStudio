@@ -14,7 +14,7 @@ namespace ZoDream.Shared.WebType
     {
         public static byte[] Signature = "wOF2"u8.ToArray();
 
-        public WOFF2Reader(Stream input) : this(new EndianReader(input, EndianType.BigEndian))
+        public WOFF2Reader(Stream input) : this(new EndianReader(input, EndianType.BigEndian, false))
         {
 
         }

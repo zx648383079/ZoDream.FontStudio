@@ -12,7 +12,7 @@ namespace ZoDream.Shared.WebType
     public class WOFFReader(EndianReader reader) : ITypefaceReader
     {
         public static byte[] Signature = "wOFF"u8.ToArray();
-        public WOFFReader(Stream input) : this(new EndianReader(input, EndianType.BigEndian))
+        public WOFFReader(Stream input) : this(new EndianReader(input, EndianType.BigEndian, false))
         {
 
         }

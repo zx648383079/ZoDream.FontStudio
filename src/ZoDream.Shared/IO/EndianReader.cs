@@ -370,5 +370,25 @@ namespace ZoDream.Shared.IO
             }
             return items;
         }
+
+        /// <summary>
+        /// 读取 int 长度的内容，并移动指针
+        /// </summary>
+        /// <returns></returns>
+        public Stream ReadAsStream()
+        {
+            return ReadAsStream(ReadInt32());
+        }
+        /// <summary>
+        /// 读取指定长度的内容，并移动指针
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public Stream ReadAsStream(long length)
+        {
+            var res = new PartialStream(BaseStream, length);
+            Position += length;
+            return res;
+        }
     }
 }

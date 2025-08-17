@@ -4,6 +4,6 @@
     {
         public const string TableName = "GPOS";
 
-        public string Name => TableName;
+        public override string Name => TableName;
     }
 }

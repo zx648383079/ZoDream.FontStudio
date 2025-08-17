@@ -11,8 +11,4 @@
 	  <ProjectReference Include="..\ZoDream.Shared\ZoDream.Shared.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Converters\" />
-	</ItemGroup>
-
 </Project>

@@ -10,5 +10,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "cmap";
 
         public string Name => TableName;
+
+        public CharacterMap[] CharacterMaps { get; set; }
     }
 }

@@ -7,5 +7,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "loca";
 
         public string Name => TableName;
+
+        public uint[] Offsets {  get; set; }
     }
 }

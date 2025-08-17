@@ -10,7 +10,7 @@ namespace ZoDream.Shared.OpenType
     {
         public static byte[] Signature = "ttcf"u8.ToArray();
 
-        public TTCReader(Stream input): this(new EndianReader(input, EndianType.BigEndian))
+        public TTCReader(Stream input): this(new EndianReader(input, EndianType.BigEndian, false))
         {
             
         }
