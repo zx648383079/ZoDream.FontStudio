@@ -9,7 +9,7 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override VerticalMetricsVariationsTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            return new VerticalMetricsVariationsTable();
         }
 
         public override void Write(EndianWriter writer, VerticalMetricsVariationsTable data, Type objectType, ITypefaceSerializer serializer)

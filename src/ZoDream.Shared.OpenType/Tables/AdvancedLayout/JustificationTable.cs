@@ -7,5 +7,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "JSTF";
 
         public string Name => TableName;
+
+        public JstfScriptTable[] ScriptTables { get; set; }
     }
 }

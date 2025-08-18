@@ -7,5 +7,8 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "BASE";
 
         public string Name => TableName;
+
+        public AxisTable HorizontalAxis { get; internal set; }
+        public AxisTable VerticalAxis { get; internal set; }
     }
 }

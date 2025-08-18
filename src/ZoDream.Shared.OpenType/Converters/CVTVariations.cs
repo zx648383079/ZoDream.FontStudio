@@ -9,7 +9,7 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override CVTVariationsTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            return new CVTVariationsTable();
         }
 
         public override void Write(EndianWriter writer, CVTVariationsTable data, Type objectType, ITypefaceSerializer serializer)

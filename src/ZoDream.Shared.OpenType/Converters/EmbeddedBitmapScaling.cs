@@ -9,7 +9,7 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override EmbeddedBitmapScalingTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            return new EmbeddedBitmapScalingTable();
         }
 
         public override void Write(EndianWriter writer, EmbeddedBitmapScalingTable data, Type objectType, ITypefaceSerializer serializer)

@@ -41,5 +41,22 @@ namespace ZoDream.Shared.OpenType
             //16.16 format
             return (float)reader.ReadUInt32() / (1 << 16);
         }
+        /// <summary>
+        /// 指定长度的字节转成 int
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static int ReadInt32(this BinaryReader reader, int count)
+        {
+            return count switch
+            {
+                1 => reader.ReadByte(),
+                2 => (reader.ReadByte() << 8) | (reader.ReadByte() << 0),
+                3 => (reader.ReadByte() << 16) | (reader.ReadByte() << 8) | (reader.ReadByte() << 0),
+                4 => (reader.ReadByte() << 24) | (reader.ReadByte() << 16) | (reader.ReadByte() << 8) | (reader.ReadByte() << 0),
+                _ => 0,
+            };
+        }
     }
 }

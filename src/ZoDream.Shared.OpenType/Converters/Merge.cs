@@ -9,7 +9,7 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override MergeTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            return new MergeTable();
         }
 
         public override void Write(EndianWriter writer, MergeTable data, Type objectType, ITypefaceSerializer serializer)

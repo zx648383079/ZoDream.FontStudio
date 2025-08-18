@@ -19,11 +19,9 @@
     <None Remove="Pages\WorkspacePage.xaml" />
     <None Remove="Themes\BaseStyle.xaml" />
     <None Remove="Themes\DarkTheme.xaml" />
+    <None Remove="Themes\Generic.xaml" />
     <None Remove="Themes\LightTheme.xaml" />
     <None Remove="Themes\TitleBar.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Remove="Themes\Generic.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,9 +72,9 @@
     <Page Update="Pages\WorkspacePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <None Update="Themes\Generic.xaml">
+    <Page Update="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </None>
+    </Page>
     <Page Update="Themes\TitleBar.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

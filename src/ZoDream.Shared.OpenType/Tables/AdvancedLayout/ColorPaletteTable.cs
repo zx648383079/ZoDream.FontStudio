@@ -7,5 +7,8 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "CPAL";
 
         public string Name => TableName;
+
+        public ushort[] Palettes { get; set; }
+        public Color[] Colors { get; set; }
     }
 }

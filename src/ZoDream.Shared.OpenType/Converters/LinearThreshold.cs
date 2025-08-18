@@ -9,7 +9,7 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override LinearThresholdTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            return new LinearThresholdTable();
         }
 
         public override void Write(EndianWriter writer, LinearThresholdTable data, Type objectType, ITypefaceSerializer serializer)

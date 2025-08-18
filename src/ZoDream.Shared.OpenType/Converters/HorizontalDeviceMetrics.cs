@@ -9,7 +9,7 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override HorizontalDeviceMetricsTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            return new HorizontalDeviceMetricsTable();
         }
 
         public override void Write(EndianWriter writer, HorizontalDeviceMetricsTable data, Type objectType, ITypefaceSerializer serializer)

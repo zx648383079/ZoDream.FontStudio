@@ -21,7 +21,7 @@ namespace ZoDream.Shared.OpenType.Converters
                 reader.Position = pos + item.StringOffset + uStorageOffset;
                 var encoding = item.EncodingID is 3 or 1 ? Encoding.BigEndianUnicode : Encoding.UTF8;
                 var text = encoding.GetString(reader.ReadBytes(item.StringLength));
-                res.Items.TryAdd((NameIdKind)item.NameID, text);
+                res.Items.TryAdd((NameID)item.NameID, text);
             }
             return res;
         }

@@ -11,9 +11,4 @@ namespace ZoDream.Shared.OpenType.Tables
         public AdvanceHeightAndTopSideBearing[] AdvHeightAndTopSideBearings {  get; set; }
     }
 
-    public struct AdvanceHeightAndTopSideBearing(ushort advanceHeight, short topSideBearing)
-    {
-        public readonly ushort AdvanceHeight => advanceHeight;
-        public readonly short TopSideBearing => topSideBearing;
-    }
 }

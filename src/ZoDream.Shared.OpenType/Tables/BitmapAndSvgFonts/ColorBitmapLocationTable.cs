@@ -7,5 +7,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "CBLC";
 
         public string Name => TableName;
+
+        public BitmapSizeTable[] BmpSizeTables { get; internal set; }
     }
 }

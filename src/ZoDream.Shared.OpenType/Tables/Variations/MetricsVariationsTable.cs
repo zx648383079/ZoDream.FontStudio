@@ -7,5 +7,8 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "MVAR";
 
         public string Name => TableName;
+
+        public ValueRecord[] valueRecords;
+        public ItemVariationStoreTable itemVariationStore;
     }
 }

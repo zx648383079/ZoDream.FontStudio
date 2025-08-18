@@ -7,5 +7,10 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "gvar";
 
         public string Name => TableName;
+
+        public ushort axisCount;
+        public TupleRecord[] _sharedTuples;
+
+        public GlyphVariableData[] _glyphVarDataArr;
     }
 }
