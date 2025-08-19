@@ -9,7 +9,8 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override StandardBitmapGraphicsTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            // TODO
+            return new StandardBitmapGraphicsTable();
         }
 
         public override void Write(EndianWriter writer, StandardBitmapGraphicsTable data, Type objectType, ITypefaceSerializer serializer)

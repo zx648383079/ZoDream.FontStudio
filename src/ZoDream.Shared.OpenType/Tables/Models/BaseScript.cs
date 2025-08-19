@@ -1,10 +1,12 @@
-﻿namespace ZoDream.Shared.OpenType.Tables
+﻿using ZoDream.Shared.OpenType.Tables.Models;
+
+namespace ZoDream.Shared.OpenType.Tables
 {
     public class BaseScript
     {
         public string ScriptIdenTag;
         public BaseValues baseValues;
-        public BaseLangSysRecord[] baseLangSysRecords;
+        public RecordEntry[] baseLangSysRecords;
         public MinMax MinMax;
     }
 }

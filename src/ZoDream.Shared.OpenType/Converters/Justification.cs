@@ -15,19 +15,12 @@ namespace ZoDream.Shared.OpenType.Converters
             ushort minorVersion = reader.ReadUInt16();
             ushort jstfScriptCount = reader.ReadUInt16();
 
-            var recs = new JstfScriptRecord[jstfScriptCount];
-            for (int i = 0; i < recs.Length; ++i)
-            {
-                recs[i] = new JstfScriptRecord(
-                     reader.ReadString(4),
-                     reader.ReadUInt16()
-                    );
-            }
+            var recs = reader.ReadRecord(jstfScriptCount);
 
             res.ScriptTables = new JstfScriptTable[recs.Length];
             for (int i = 0; i < recs.Length; ++i)
             {
-                JstfScriptRecord rec = recs[i];
+                var rec = recs[i];
                 reader.BaseStream.Position = tableStartAt + rec.Offset;
 
                 JstfScriptTable jstfScriptTable = ReadJstfScriptTable(reader);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using ZoDream.Shared.OpenType.Tables;
 
 namespace ZoDream.Shared.OpenType.CompactFontFormat
@@ -6,10 +7,10 @@ namespace ZoDream.Shared.OpenType.CompactFontFormat
     public class FontFamily
     {
         internal string FontName { get; set; }
-        internal GlyphData[] _glyphs;
+        internal GlyphData[] Glyphs;
 
-        internal List<byte[]> _localSubrRawBufferList;
-        internal List<byte[]> _globalSubrRawBufferList;
+        internal List<Stream> _localSubrRawBufferList;
+        internal List<Stream> _globalSubrRawBufferList;
 
         internal int _defaultWidthX;
         internal int _nominalWidthX;

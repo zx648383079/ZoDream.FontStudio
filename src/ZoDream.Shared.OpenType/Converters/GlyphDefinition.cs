@@ -135,7 +135,7 @@ namespace ZoDream.Shared.OpenType.Converters
             return attachmentListTable;
         }
 
-        private ClassDefTable ReadClassDefTable(EndianReader reader, long beginAt)
+        public static ClassDefTable ReadClassDefTable(EndianReader reader, long beginAt)
         {
             reader.BaseStream.Seek(beginAt, SeekOrigin.Begin);
 

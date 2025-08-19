@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using ZoDream.Shared.IO;
+using ZoDream.Shared.OpenType.Tables;
 
 namespace ZoDream.Shared.OpenType
 {
@@ -10,13 +12,13 @@ namespace ZoDream.Shared.OpenType
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        public static float ReadF2Dot14(this BinaryReader reader)
+        internal static float ReadF2Dot14(this BinaryReader reader)
         {
             return ((float)reader.ReadInt16()) / (1 << 14); /* Format 2.14 */
         }
 
 
-        public static GlyphBound ReadBounds(this BinaryReader reader)
+        internal static GlyphBound ReadBounds(this BinaryReader reader)
         {
             return new GlyphBound(
                 reader.ReadInt16(),//xmin
@@ -25,8 +27,18 @@ namespace ZoDream.Shared.OpenType
                 reader.ReadInt16());//ymax
         }
 
-
-        public static int ReadUInt24(this BinaryReader reader)
+        internal static RecordEntry[] ReadRecord(this EndianReader reader, int count)
+        {
+            return reader.ReadArray(count, () => {
+                var tag = reader.ReadString(4);
+                return new RecordEntry(tag == "\0\0\0\0" ? string.Empty : tag, reader.ReadUInt16());
+            });
+        }
+        internal static ushort[] ReadUInt16Array(this EndianReader reader, int count)
+        {
+            return reader.ReadArray(count, reader.ReadUInt16);
+        }
+        internal static int ReadUInt24(this BinaryReader reader)
         {
             byte highByte = reader.ReadByte();
             return (highByte << 16) | reader.ReadUInt16();
@@ -36,7 +48,7 @@ namespace ZoDream.Shared.OpenType
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        public static float ReadFixed(this BinaryReader reader)
+        internal static float ReadFixed(this BinaryReader reader)
         {
             //16.16 format
             return (float)reader.ReadUInt32() / (1 << 16);
@@ -47,7 +59,7 @@ namespace ZoDream.Shared.OpenType
         /// <param name="reader"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static int ReadInt32(this BinaryReader reader, int count)
+        internal static int ReadInt32(this BinaryReader reader, int count)
         {
             return count switch
             {

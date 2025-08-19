@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZoDream.FontStudio.ViewModels
 {
-    public class WorkspaceViewModel : ObservableObject
+    public partial class WorkspaceViewModel : ObservableObject
     {
     }
 }

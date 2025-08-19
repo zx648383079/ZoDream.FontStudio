@@ -51,12 +51,22 @@ namespace ZoDream.Shared.OpenType.Converters
             throw new NotImplementedException();
         }
 
+        internal static CoverageTable[] ReadMultiple(EndianReader reader, long initPos, ushort[] offsets)
+        {
+            var results = new CoverageTable[offsets.Length];
+            for (int i = 0; i < results.Length; ++i)
+            {
+                results[i] = Read(reader, initPos + offsets[i]);
+            }
+            return results;
+        }
+
 
         public override void Write(EndianWriter writer, CoverageTable data, Type objectType, ITypefaceSerializer serializer)
         {
             throw new NotImplementedException();
         }
 
-
+        
     }
 }

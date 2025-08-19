@@ -9,7 +9,8 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override Pcl5Table? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            // TODO
+            return new Pcl5Table();
         }
 
         public override void Write(EndianWriter writer, Pcl5Table data, Type objectType, ITypefaceSerializer serializer)

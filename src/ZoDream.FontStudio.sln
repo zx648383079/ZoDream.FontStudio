@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.WebType", "Z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.Font", "ZoDream.Shared.Font\ZoDream.Shared.Font.csproj", "{50A4C47A-A176-470B-9396-FE8534A85399}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.UndoRedo", "..\shared\ZoDream.Shared.UndoRedo\ZoDream.Shared.UndoRedo.csproj", "{4779350D-A68A-DF4B-E10F-90D83EB32669}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -89,6 +91,18 @@ Global
 		{50A4C47A-A176-470B-9396-FE8534A85399}.Release|x64.Build.0 = Release|Any CPU
 		{50A4C47A-A176-470B-9396-FE8534A85399}.Release|x86.ActiveCfg = Release|Any CPU
 		{50A4C47A-A176-470B-9396-FE8534A85399}.Release|x86.Build.0 = Release|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Debug|x64.Build.0 = Debug|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Debug|x86.Build.0 = Debug|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|ARM64.Build.0 = Release|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|x64.ActiveCfg = Release|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|x64.Build.0 = Release|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|x86.ActiveCfg = Release|Any CPU
+		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,15 +23,11 @@ namespace ZoDream.Shared.OpenType.Converters
                 default: throw new NotSupportedException();
                 case 1:
                     {
-                        Cff1Parser cff1 = new Cff1Parser();
-                        cff1.ParseAfterHeader(startAt, reader);
-                        _cff1FontSet = cff1.ResultCff1FontSet;
+                        res.FontSet = ReadBytecode(reader).FontSet;
                     }
                     break;
                 case 2:
                     {
-                        Cff2Parser cff2 = new Cff2Parser();
-                        cff2.ParseAfterHeader(reader);
                     }
                     break;
             }

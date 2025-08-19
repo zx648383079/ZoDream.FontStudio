@@ -9,7 +9,8 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override VerticalOriginTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            throw new NotImplementedException();
+            // TODO
+            return new VerticalOriginTable();
         }
 
         public override void Write(EndianWriter writer, VerticalOriginTable data, Type objectType, ITypefaceSerializer serializer)

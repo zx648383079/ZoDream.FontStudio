@@ -86,7 +86,7 @@ namespace ZoDream.Shared.OpenType.Converters
             return res;
         }
 
-        private VariationRegion ReadVariationRegion(EndianReader reader, ushort axisCount)
+        private static VariationRegion ReadVariationRegion(EndianReader reader, ushort axisCount)
         {
             var res = new VariationRegion();
             res.regionAxes = new RegionAxisCoordinate[axisCount];

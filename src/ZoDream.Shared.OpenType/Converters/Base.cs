@@ -71,29 +71,15 @@ namespace ZoDream.Shared.OpenType.Converters
             long baseScriptListStartAt = reader.BaseStream.Position;
             ushort baseScriptCount = reader.ReadUInt16();
 
-            BaseScriptRecord[] baseScriptRecord_offsets = new BaseScriptRecord[baseScriptCount];
-            for (int i = 0; i < baseScriptCount; ++i)
-            {
-                //BaseScriptRecord
-
-                //A BaseScriptRecord contains a script identification tag (baseScriptTag), 
-                //which must be identical to the ScriptTag used to define the script in the ScriptList of a GSUB or GPOS table. 
-                //Each record also must include an offset to a BaseScript table that defines the baseline and min/max extent data for the script.             
-
-                //BaseScriptRecord
-                //Type 	    Name 	            Description
-                //Tag 	    baseScriptTag 	    4-byte script identification tag
-                //Offset16 	baseScriptOffset 	Offset to BaseScript table, from beginning of BaseScriptList             
-                baseScriptRecord_offsets[i] = new BaseScriptRecord(reader.ReadString(4), reader.ReadUInt16());
-            }
+            var baseScriptRecord_offsets = reader.ReadRecord(baseScriptCount);
             BaseScript[] baseScripts = new BaseScript[baseScriptCount];
             for (int i = 0; i < baseScriptCount; ++i)
             {
-                BaseScriptRecord baseScriptRecord = baseScriptRecord_offsets[i];
-                reader.BaseStream.Position = baseScriptListStartAt + baseScriptRecord.BaseScriptOffset;
+                var baseScriptRecord = baseScriptRecord_offsets[i];
+                reader.BaseStream.Position = baseScriptListStartAt + baseScriptRecord.Offset;
                 //
                 BaseScript baseScipt = ReadBaseScriptTable(reader);
-                baseScipt.ScriptIdenTag = baseScriptRecord.BaseScriptTag;
+                baseScipt.ScriptIdenTag = baseScriptRecord.Tag;
                 baseScripts[i] = baseScipt;
             }
             return baseScripts;
@@ -105,24 +91,11 @@ namespace ZoDream.Shared.OpenType.Converters
             ushort baseValueOffset = reader.ReadUInt16();
             ushort defaultMinMaxOffset = reader.ReadUInt16();
             ushort baseLangSysCount = reader.ReadUInt16();
-            BaseLangSysRecord[] baseLangSysRecords = null;
+            RecordEntry[] baseLangSysRecords = null;
 
             if (baseLangSysCount > 0)
             {
-                baseLangSysRecords = new BaseLangSysRecord[baseLangSysCount];
-                for (int i = 0; i < baseLangSysCount; ++i)
-                {
-                    //BaseLangSysRecord
-                    //A BaseLangSysRecord defines min/max extents for a language system or a language-specific feature.
-                    //Each record contains an identification tag for the language system (baseLangSysTag) and an offset to a MinMax table (MinMax) 
-                    //that defines extent coordinate values for the language system and references feature-specific extent data.
-
-                    //BaseLangSysRecord
-                    //Type 	        Name 	        Description
-                    //Tag 	        baseLangSysTag 	4-byte language system identification tag
-                    //Offset16 	    minMaxOffset 	Offset to MinMax table, from beginning of BaseScript table
-                    baseLangSysRecords[i] = new BaseLangSysRecord(reader.ReadString(4), reader.ReadUInt16());
-                }
+                baseLangSysRecords = reader.ReadRecord(baseLangSysCount);
             }
 
             BaseScript baseScript = new BaseScript();

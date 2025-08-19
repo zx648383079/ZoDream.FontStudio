@@ -1,4 +1,6 @@
-﻿namespace ZoDream.Shared.OpenType.Tables
+﻿using ZoDream.Shared.OpenType.CompactFontFormat;
+
+namespace ZoDream.Shared.OpenType.Tables
 {
     public class GlyphData
     {
@@ -17,7 +19,7 @@
         //
         public GlyphClassKind GlyphClass { get; internal set; } //FOUND in all mode
         internal ushort MarkClassDef { get; set; }              //FOUND in all mode
-
+        internal readonly FontGlyphData Glyph;
 
         internal GlyphData(
             GlyphPoint[] glyphPoints,
@@ -26,12 +28,18 @@
             byte[] glyphInstructions,
             ushort index)
         {
-            this.GlyphPoints = glyphPoints;
+            GlyphPoints = glyphPoints;
             EndPoints = contourEndPoints;
             Bounds = bounds;
             GlyphInstructions = glyphInstructions;
             GlyphIndex = index;
 
+        }
+
+        public GlyphData(FontGlyphData cff1Glyph, ushort glyphIndex)
+        {
+            Glyph = cff1Glyph;
+            GlyphIndex = glyphIndex;
         }
     }
 }
