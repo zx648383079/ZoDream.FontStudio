@@ -39,7 +39,7 @@ namespace ZoDream.Shared.OpenType.Converters
                 for (uint i = 0; i < numberOfIndexSubTables; ++i)
                 {
                     IndexSubTableArray indexSubTableArr = indexSubTableArrs[i];
-                    reader.BaseStream.Position = cblcBeginPos + bmpSizeTable.IndexSubTableArrayOffset + indexSubTableArr.additionalOffsetToIndexSubtable;
+                    reader.BaseStream.Position = cblcBeginPos + bmpSizeTable.IndexSubTableArrayOffset + indexSubTableArr.AdditionalOffsetToIndexSubtable;
 
                     IndexSubTableBase result = subTables[i] = IndexSubConverter.Read(reader, bmpSizeTable);
                     result.FirstGlyphIndex = indexSubTableArr.FirstGlyphIndex;

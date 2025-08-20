@@ -11,9 +11,9 @@ namespace ZoDream.Shared.OpenType.Tables
         public string Name => TableName;
 
 
-        internal ItemVariationStoreTable _itemVartionStore;
-        internal DeltaSetIndexMap[] _advanceWidthMapping;
-        internal DeltaSetIndexMap[] _lsbMapping;
-        internal DeltaSetIndexMap[] _rsbMapping;
+        internal ItemVariationStoreTable ItemVartionStore;
+        internal DeltaSetIndexMap[] AdvanceWidthMapping;
+        internal DeltaSetIndexMap[] LsbMapping;
+        internal DeltaSetIndexMap[] RsbMapping;
     }
 }

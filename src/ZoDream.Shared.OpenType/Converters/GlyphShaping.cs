@@ -3,7 +3,6 @@ using System.IO;
 using ZoDream.Shared.Font;
 using ZoDream.Shared.IO;
 using ZoDream.Shared.OpenType.Tables;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZoDream.Shared.OpenType.Converters
 {

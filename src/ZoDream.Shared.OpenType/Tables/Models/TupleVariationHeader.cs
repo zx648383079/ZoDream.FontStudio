@@ -2,14 +2,14 @@
 {
     public class TupleVariationHeader
     {
-        public ushort variableDataSize;
+        public ushort VariableDataSize;
 
-        public int flags;
-        public ushort indexToSharedTupleRecArray;
+        public int Flags;
+        public ushort IndexToSharedTupleRecArray;
 
-        public TupleRecord peakTuple;
-        public TupleRecord intermediateStartTuple;
-        public TupleRecord intermediateEndTuple;
+        public TupleRecord PeakTuple;
+        public TupleRecord IntermediateStartTuple;
+        public TupleRecord IntermediateEndTuple;
 
         public ushort[] PrivatePoints { get; internal set; }
         public short[] PackedDeltasXY { get; internal set; }

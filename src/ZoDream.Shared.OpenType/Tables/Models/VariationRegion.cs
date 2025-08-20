@@ -2,6 +2,6 @@
 {
     public class VariationRegion
     {
-        public RegionAxisCoordinate[] regionAxes;
+        public RegionAxisCoordinate[] RegionAxes;
     }
 }

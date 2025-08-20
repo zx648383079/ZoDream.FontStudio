@@ -2,6 +2,6 @@
 {
     public class ItemVariationStoreTable
     {
-        public VariationRegion[] variationRegions;
+        public VariationRegion[] VariationRegions;
     }
 }

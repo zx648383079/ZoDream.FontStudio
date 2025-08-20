@@ -7,5 +7,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "cvar";
 
         public string Name => TableName;
+
+        public TupleVariationHeader[] TupleVariationHeaders { get; internal set; }
     }
 }

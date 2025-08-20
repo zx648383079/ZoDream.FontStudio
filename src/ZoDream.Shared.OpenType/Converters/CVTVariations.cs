@@ -9,7 +9,16 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override CVTVariationsTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            return new CVTVariationsTable();
+            var res = new CVTVariationsTable();
+            var majorVersion = reader.ReadUInt16();
+            var minorVersion = reader.ReadUInt16();
+            var tupleVariationCount = reader.ReadUInt16();
+            var dataOffset = reader.ReadUInt16();
+
+            res.TupleVariationHeaders = reader.ReadArray(tupleVariationCount, () => {
+                return GlyphVariationsConverter.ReadTupleVariationHeader(reader, 0);
+            });
+            return res;
         }
 
         public override void Write(EndianWriter writer, CVTVariationsTable data, Type objectType, ITypefaceSerializer serializer)

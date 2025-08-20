@@ -21,23 +21,23 @@ namespace ZoDream.Shared.OpenType.Converters
 
             //itemVariationStore
             reader.BaseStream.Position = beginAt + itemVariationStoreOffset;
-            res._itemVartionStore = ReadItemVariationStore(reader);
+            res.ItemVartionStore = ReadItemVariationStore(reader);
 
             //-----------------------------------------
             if (advanceWidthMappingOffset > 0)
             {
                 reader.BaseStream.Position = beginAt + advanceWidthMappingOffset;
-                res._advanceWidthMapping = ReadDeltaSetIndexMap(reader);
+                res.AdvanceWidthMapping = ReadDeltaSetIndexMap(reader);
             }
             if (lsbMappingOffset > 0)
             {
                 reader.BaseStream.Position = beginAt + lsbMappingOffset;
-                res._lsbMapping = ReadDeltaSetIndexMap(reader);
+                res.LsbMapping = ReadDeltaSetIndexMap(reader);
             }
             if (rsbMappingOffset > 0)
             {
                 reader.BaseStream.Position = beginAt + rsbMappingOffset;
-                res._rsbMapping = ReadDeltaSetIndexMap(reader);
+                res.RsbMapping = ReadDeltaSetIndexMap(reader);
             }
             return res;
         }
@@ -52,7 +52,7 @@ namespace ZoDream.Shared.OpenType.Converters
 
             int mapDataSize = mapCount * entrySize;
 
-            DeltaSetIndexMap[] deltaSetIndexMaps = new DeltaSetIndexMap[mapCount];
+            var deltaSetIndexMaps = new DeltaSetIndexMap[mapCount];
 
             for (int i = 0; i < mapCount; ++i)
             {
@@ -77,11 +77,11 @@ namespace ZoDream.Shared.OpenType.Converters
             var res = new ItemVariationStoreTable();
             ushort axisCount = reader.ReadUInt16();
             ushort regionCount = reader.ReadUInt16();
-            res.variationRegions = new VariationRegion[regionCount];
+            res.VariationRegions = new VariationRegion[regionCount];
             for (int i = 0; i < regionCount; ++i)
             {
                 var variationRegion = ReadVariationRegion(reader, axisCount);
-                res.variationRegions[i] = variationRegion;
+                res.VariationRegions[i] = variationRegion;
             }
             return res;
         }
@@ -89,10 +89,10 @@ namespace ZoDream.Shared.OpenType.Converters
         private static VariationRegion ReadVariationRegion(EndianReader reader, ushort axisCount)
         {
             var res = new VariationRegion();
-            res.regionAxes = new RegionAxisCoordinate[axisCount];
+            res.RegionAxes = new RegionAxisCoordinate[axisCount];
             for (int i = 0; i < axisCount; ++i)
             {
-                res.regionAxes[i] = new RegionAxisCoordinate(
+                res.RegionAxes[i] = new RegionAxisCoordinate(
                     reader.ReadF2Dot14(), //start
                     reader.ReadF2Dot14(), //peak
                     reader.ReadF2Dot14() //end

@@ -2,19 +2,19 @@
 
 namespace ZoDream.Shared.OpenType.Tables
 {
-    public class KerningSubTable
+    public class KernSubtableFormat0 : IKernSubtable
     {
-        List<KerningPair> _kernPairs;
-        Dictionary<uint, short> _kernDic;
-        public KerningSubTable(int capcity)
+        public List<KernPair> Pairs;
+        private Dictionary<uint, short> _kernDic;
+        public KernSubtableFormat0(int capcity)
         {
-            _kernPairs = new List<KerningPair>(capcity);
+            Pairs = new List<KernPair>(capcity);
             _kernDic = new Dictionary<uint, short>(capcity);
         }
 
         public void AddKernPair(ushort left, ushort right, short value)
         {
-            _kernPairs.Add(new KerningPair(left, right, value));
+            Pairs.Add(new KernPair(left, right, value));
             //may has duplicate key ?
             //TODO: review here
             uint key = (uint)((left << 16) | right);
@@ -29,4 +29,6 @@ namespace ZoDream.Shared.OpenType.Tables
             return found;
         }
     }
+
+    
 }

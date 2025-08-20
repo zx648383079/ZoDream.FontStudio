@@ -9,6 +9,6 @@ namespace ZoDream.Shared.OpenType.Tables
 
         public string Name => TableName;
 
-        public List<KerningSubTable> KernSubTables { get; internal set; }
+        public List<IKernSubtable> SubTables { get; internal set; }
     }
 }

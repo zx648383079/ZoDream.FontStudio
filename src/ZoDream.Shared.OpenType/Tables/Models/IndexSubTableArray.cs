@@ -4,12 +4,12 @@
     {
         public readonly ushort FirstGlyphIndex;
         public readonly ushort LastGlyphIndex;
-        public readonly uint additionalOffsetToIndexSubtable;
+        public readonly uint AdditionalOffsetToIndexSubtable;
         public IndexSubTableArray(ushort firstGlyphIndex, ushort lastGlyphIndex, uint additionalOffsetToIndexSubtable)
         {
-            this.FirstGlyphIndex = firstGlyphIndex;
-            this.LastGlyphIndex = lastGlyphIndex;
-            this.additionalOffsetToIndexSubtable = additionalOffsetToIndexSubtable;
+            FirstGlyphIndex = firstGlyphIndex;
+            LastGlyphIndex = lastGlyphIndex;
+            AdditionalOffsetToIndexSubtable = additionalOffsetToIndexSubtable;
         }
     }
 }

@@ -8,9 +8,9 @@ namespace ZoDream.Shared.OpenType.Tables
 
         public string Name => TableName;
 
-        public ushort axisCount;
-        public TupleRecord[] _sharedTuples;
+        public ushort AxisCount;
+        public TupleRecord[] SharedTuples;
 
-        public GlyphVariableData[] _glyphVarDataArr;
+        public GlyphVariableData[] GlyphVarDataArr;
     }
 }

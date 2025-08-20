@@ -23,7 +23,7 @@ namespace ZoDream.Shared.OpenType.Converters
                 var rec = recs[i];
                 reader.BaseStream.Position = tableStartAt + rec.Offset;
 
-                JstfScriptTable jstfScriptTable = ReadJstfScriptTable(reader);
+                var jstfScriptTable = ReadJstfScriptTable(reader);
                 jstfScriptTable.ScriptTag = rec.Tag;
                 res.ScriptTables[i] = jstfScriptTable;
             }

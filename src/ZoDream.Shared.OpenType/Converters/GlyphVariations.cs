@@ -22,7 +22,7 @@ namespace ZoDream.Shared.OpenType.Converters
             }
 #endif
 
-            res.axisCount = reader.ReadUInt16(); //This must be the same number as axisCount in the 'fvar' table
+            res.AxisCount = reader.ReadUInt16(); //This must be the same number as axisCount in the 'fvar' table
 
             ushort sharedTupleCount = reader.ReadUInt16();
             uint sharedTuplesOffset = reader.ReadUInt32();
@@ -56,22 +56,22 @@ namespace ZoDream.Shared.OpenType.Converters
             var tupleRecords = new TupleRecord[sharedTupleCount];
             for (int t = 0; t < sharedTupleCount; ++t)
             {
-                tupleRecords[t] = new TupleRecord(reader.ReadArray(res.axisCount, reader.ReadF2Dot14));
+                tupleRecords[t] = new TupleRecord(reader.ReadArray(res.AxisCount, reader.ReadF2Dot14));
             }
 
-            res._sharedTuples = tupleRecords;
+            res.SharedTuples = tupleRecords;
 
 
             //GlyphVariationData array ... 
             long glyphVariableData_startAt = beginAt + glyphVariationDataArrayOffset;
             reader.BaseStream.Position = glyphVariableData_startAt;
 
-            res._glyphVarDataArr = new GlyphVariableData[glyphVariationDataOffsets.Length];
+            res.GlyphVarDataArr = new GlyphVariableData[glyphVariationDataOffsets.Length];
 
             for (int i = 0; i < glyphVariationDataOffsets.Length; ++i)
             {
                 reader.BaseStream.Position = glyphVariableData_startAt + glyphVariationDataOffsets[i];
-                res._glyphVarDataArr[i] = ReadGlyphVariationData(reader, res.axisCount);
+                res.GlyphVarDataArr[i] = ReadGlyphVariationData(reader, res.AxisCount);
             }
             return res;
         }
@@ -119,7 +119,7 @@ namespace ZoDream.Shared.OpenType.Converters
             {
                 TupleVariationHeader header = tupleHaders[i];
 
-                ushort dataSize = header.variableDataSize;
+                ushort dataSize = header.VariableDataSize;
                 long expect_endAt = reader.BaseStream.Position + dataSize;
 
 #if DEBUG
@@ -131,11 +131,11 @@ namespace ZoDream.Shared.OpenType.Converters
                 //The variationDataSize value indicates the size of serialized data for the given tuple variation table that is contained in the serialized data. 
                 //It does not include the size of the TupleVariationHeader.
 
-                if ((header.flags & ((int)TupleIndexFormat.PRIVATE_POINT_NUMBERS >> 12)) == ((int)TupleIndexFormat.PRIVATE_POINT_NUMBERS) >> 12)
+                if ((header.Flags & ((int)TupleIndexFormat.PRIVATE_POINT_NUMBERS >> 12)) == ((int)TupleIndexFormat.PRIVATE_POINT_NUMBERS) >> 12)
                 {
                     header.PrivatePoints = ReadPackedPoints(reader);
                 }
-                else if (header.flags != 0)
+                else if (header.Flags != 0)
                 {
 
                 }
@@ -198,27 +198,27 @@ namespace ZoDream.Shared.OpenType.Converters
             return glyphVarData;
         }
 
-        private TupleVariationHeader ReadTupleVariationHeader(EndianReader reader, ushort axisCount)
+        public static TupleVariationHeader ReadTupleVariationHeader(EndianReader reader, ushort axisCount)
         {
             var header = new TupleVariationHeader();
 
-            header.variableDataSize = reader.ReadUInt16();
+            header.VariableDataSize = reader.ReadUInt16();
             ushort tupleIndex = reader.ReadUInt16();
             int flags = (tupleIndex >> 12) & 0xF; //The high 4 bits are flags(see below).
-            header.flags = flags; //The high 4 bits are flags(see below).
-            header.indexToSharedTupleRecArray = (ushort)(tupleIndex & 0x0FFF); // The low 12 bits are an index into a shared tuple records array.
+            header.Flags = flags; //The high 4 bits are flags(see below).
+            header.IndexToSharedTupleRecArray = (ushort)(tupleIndex & 0x0FFF); // The low 12 bits are an index into a shared tuple records array.
 
 
             if ((flags & ((int)TupleIndexFormat.EMBEDDED_PEAK_TUPLE >> 12)) == ((int)TupleIndexFormat.EMBEDDED_PEAK_TUPLE >> 12))
             {
                 //TODO:...
-                header.peakTuple = new TupleRecord(reader.ReadArray(axisCount, reader.ReadF2Dot14));
+                header.PeakTuple = new TupleRecord(reader.ReadArray(axisCount, reader.ReadF2Dot14));
             }
             if ((flags & ((int)TupleIndexFormat.INTERMEDIATE_REGION >> 12)) == ((int)TupleIndexFormat.INTERMEDIATE_REGION >> 12))
             {
                 //TODO:...
-                header.intermediateStartTuple = new TupleRecord(reader.ReadArray(axisCount, reader.ReadF2Dot14));
-                header.intermediateEndTuple = new TupleRecord(reader.ReadArray(axisCount, reader.ReadF2Dot14));
+                header.IntermediateStartTuple = new TupleRecord(reader.ReadArray(axisCount, reader.ReadF2Dot14));
+                header.IntermediateEndTuple = new TupleRecord(reader.ReadArray(axisCount, reader.ReadF2Dot14));
             }
 
             return header;

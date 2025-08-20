@@ -10,14 +10,16 @@ namespace ZoDream.Shared.OpenType.Converters
         public override EmbeddedBitmapLocationTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
             var res = new EmbeddedBitmapLocationTable();
-            long eblcBeginPos = reader.BaseStream.Position;
-            //
+            long beginAt = reader.BaseStream.Position;
+
             ushort versionMajor = reader.ReadUInt16();
             ushort versionMinor = reader.ReadUInt16();
             uint numSizes = reader.ReadUInt32();
 
             if (numSizes > EmbeddedBitmapLocationTable.MAX_BITMAP_STRIKES)
+            {
                 throw new Exception("Too many bitmap strikes in font.");
+            }
 
             //----------------
             var bmpSizeTables = new BitmapSizeTable[numSizes];
@@ -29,11 +31,10 @@ namespace ZoDream.Shared.OpenType.Converters
 
             for (int n = 0; n < numSizes; ++n)
             {
-                BitmapSizeTable bmpSizeTable = bmpSizeTables[n];
+                var bmpSizeTable = bmpSizeTables[n];
                 uint numberofIndexSubTables = bmpSizeTable.NumberOfIndexSubTables;
 
-                //
-                IndexSubTableArray[] indexSubTableArrs = new IndexSubTableArray[numberofIndexSubTables];
+                var indexSubTableArrs = new IndexSubTableArray[numberofIndexSubTables];
                 for (uint i = 0; i < numberofIndexSubTables; ++i)
                 {
                     indexSubTableArrs[i] = new IndexSubTableArray(
@@ -42,13 +43,12 @@ namespace ZoDream.Shared.OpenType.Converters
                              reader.ReadUInt32());//Add to indexSubTableArrayOffset to get offset from beginning of EBLC.                      
                 }
 
-                //---
-                IndexSubTableBase[] subTables = new IndexSubTableBase[numberofIndexSubTables];
+                var subTables = new IndexSubTableBase[numberofIndexSubTables];
                 bmpSizeTable.IndexSubTables = subTables;
                 for (uint i = 0; i < numberofIndexSubTables; ++i)
                 {
-                    IndexSubTableArray indexSubTableArr = indexSubTableArrs[i];
-                    reader.BaseStream.Position = eblcBeginPos + bmpSizeTable.IndexSubTableArrayOffset + indexSubTableArr.additionalOffsetToIndexSubtable;
+                    var indexSubTableArr = indexSubTableArrs[i];
+                    reader.BaseStream.Position = beginAt + bmpSizeTable.IndexSubTableArrayOffset + indexSubTableArr.AdditionalOffsetToIndexSubtable;
 
                     subTables[i] = IndexSubConverter.Read(reader, bmpSizeTable);
                 }
