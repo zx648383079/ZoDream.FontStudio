@@ -7,5 +7,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "sbix";
 
         public string Name => TableName;
+
+        public SbixStrike[] Strikes { get; internal set; }
     }
 }

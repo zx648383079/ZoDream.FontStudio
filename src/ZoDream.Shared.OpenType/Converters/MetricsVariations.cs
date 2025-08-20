@@ -18,26 +18,24 @@ namespace ZoDream.Shared.OpenType.Converters
             ushort valueRecordCount = reader.ReadUInt16();
             ushort itemVariationStoreOffset = reader.ReadUInt16();
 
-            res.valueRecords = new ValueRecord[valueRecordCount];
+            res.ValueRecords = new ValueRecord[valueRecordCount];
 
             for (int i = 0; i < valueRecordCount; ++i)
             {
                 long recStartAt = reader.BaseStream.Position;
-                res.valueRecords[i] = new ValueRecord(
+                res.ValueRecords[i] = new ValueRecord(
                     reader.ReadString(4),
                     reader.ReadUInt16(),
                     reader.ReadUInt16()
                     );
 
-                reader.BaseStream.Position = recStartAt + valueRecordSize;//**Implementations must use the valueRecordSize field to determine the start of each record.**
+                reader.BaseStream.Position = recStartAt + valueRecordSize;
             }
 
-            //
-            //item variation store table
             if (valueRecordCount > 0)
             {
                 reader.BaseStream.Position = startAt + itemVariationStoreOffset;
-                res.itemVariationStore = HorizontalMetricsVariationsConverter.ReadItemVariationStore(reader);
+                res.ItemVariationStore = HorizontalMetricsVariationsConverter.ReadItemVariationStore(reader);
             }
             return res;
         }

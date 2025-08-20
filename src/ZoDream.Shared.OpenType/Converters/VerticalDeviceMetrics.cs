@@ -19,7 +19,7 @@ namespace ZoDream.Shared.OpenType.Converters
                     reader.ReadByte(),
                     reader.ReadByte());
             });
-            var offsets = reader.ReadArray(numRatios, reader.ReadUInt16);
+            var offsets = reader.ReadUInt16Array(numRatios);
             return res;
         }
 

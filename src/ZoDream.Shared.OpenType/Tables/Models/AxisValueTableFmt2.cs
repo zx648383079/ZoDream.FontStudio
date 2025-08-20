@@ -4,11 +4,11 @@
     {
         public override int Format => 2;
 
-        public ushort axisIndex;
-        public ushort flags;
-        public ushort valueNameId;
-        public float nominalValue;
-        public float rangeMinValue;
-        public float rangeMaxValue;
+        public ushort Index;
+        public ushort Flags;
+        public ushort ValueNameId;
+        public float NominalValue;
+        public float RangeMinValue;
+        public float RangeMaxValue;
     }
 }

@@ -2,16 +2,16 @@
 {
     public readonly struct IndexSubHeader
     {
-        public readonly ushort indexFormat;
-        public readonly ushort imageFormat;
-        public readonly uint imageDataOffset;
+        public readonly ushort IndexFormat;
+        public readonly ushort ImageFormat;
+        public readonly uint ImageDataOffset;
 
         public IndexSubHeader(ushort indexFormat,
             ushort imageFormat, uint imageDataOffset)
         {
-            this.indexFormat = indexFormat;
-            this.imageFormat = imageFormat;
-            this.imageDataOffset = imageDataOffset;
+            IndexFormat = indexFormat;
+            ImageFormat = imageFormat;
+            ImageDataOffset = imageDataOffset;
         }
     }
 }

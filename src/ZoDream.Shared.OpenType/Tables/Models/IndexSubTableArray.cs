@@ -2,13 +2,13 @@
 {
     public readonly struct IndexSubTableArray
     {
-        public readonly ushort firstGlyphIndex;
-        public readonly ushort lastGlyphIndex;
+        public readonly ushort FirstGlyphIndex;
+        public readonly ushort LastGlyphIndex;
         public readonly uint additionalOffsetToIndexSubtable;
         public IndexSubTableArray(ushort firstGlyphIndex, ushort lastGlyphIndex, uint additionalOffsetToIndexSubtable)
         {
-            this.firstGlyphIndex = firstGlyphIndex;
-            this.lastGlyphIndex = lastGlyphIndex;
+            this.FirstGlyphIndex = firstGlyphIndex;
+            this.LastGlyphIndex = lastGlyphIndex;
             this.additionalOffsetToIndexSubtable = additionalOffsetToIndexSubtable;
         }
     }

@@ -51,7 +51,9 @@ namespace ZoDream.Shared.OpenType
     {
         public override ushort Format => 12;
 
-        uint[] StartCharCodes, EndCharCodes, StartGlyphIds;
+        public uint[] StartCharCodes;
+        public uint[] EndCharCodes;
+        public uint[] StartGlyphIds;
         internal CharMapFormat12(uint[] startCharCodes, uint[] endCharCodes, uint[] startGlyphIds)
         {
             StartCharCodes = startCharCodes;

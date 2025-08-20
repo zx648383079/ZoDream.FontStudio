@@ -23,11 +23,10 @@ namespace ZoDream.Shared.OpenType.Converters
             for (int n = 0; n < numSizes; ++n)
             {
                 var bmpSizeTable = bmpSizeTables[n];
-                uint numberofIndexSubTables = bmpSizeTable.NumberOfIndexSubTables;
+                uint numberOfIndexSubTables = bmpSizeTable.NumberOfIndexSubTables;
 
-                //
-                var indexSubTableArrs = new IndexSubTableArray[numberofIndexSubTables];
-                for (uint i = 0; i < numberofIndexSubTables; ++i)
+                var indexSubTableArrs = new IndexSubTableArray[numberOfIndexSubTables];
+                for (uint i = 0; i < numberOfIndexSubTables; ++i)
                 {
                     indexSubTableArrs[i] = new IndexSubTableArray(
                              reader.ReadUInt16(), //First glyph ID of this range.
@@ -35,17 +34,16 @@ namespace ZoDream.Shared.OpenType.Converters
                              reader.ReadUInt32());//Add to indexSubTableArrayOffset to get offset from beginning of EBLC.                      
                 }
 
-                //---
-                IndexSubTableBase[] subTables = new IndexSubTableBase[numberofIndexSubTables];
+                var subTables = new IndexSubTableBase[numberOfIndexSubTables];
                 bmpSizeTable.IndexSubTables = subTables;
-                for (uint i = 0; i < numberofIndexSubTables; ++i)
+                for (uint i = 0; i < numberOfIndexSubTables; ++i)
                 {
                     IndexSubTableArray indexSubTableArr = indexSubTableArrs[i];
                     reader.BaseStream.Position = cblcBeginPos + bmpSizeTable.IndexSubTableArrayOffset + indexSubTableArr.additionalOffsetToIndexSubtable;
 
                     IndexSubTableBase result = subTables[i] = IndexSubConverter.Read(reader, bmpSizeTable);
-                    result.firstGlyphIndex = indexSubTableArr.firstGlyphIndex;
-                    result.lastGlyphIndex = indexSubTableArr.lastGlyphIndex;
+                    result.FirstGlyphIndex = indexSubTableArr.FirstGlyphIndex;
+                    result.LastGlyphIndex = indexSubTableArr.LastGlyphIndex;
                 }
             }
             return res;

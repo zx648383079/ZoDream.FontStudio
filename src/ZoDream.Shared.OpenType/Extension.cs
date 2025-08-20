@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using ZoDream.Shared.IO;
 using ZoDream.Shared.OpenType.Tables;
 
@@ -37,6 +38,16 @@ namespace ZoDream.Shared.OpenType
         internal static ushort[] ReadUInt16Array(this EndianReader reader, int count)
         {
             return reader.ReadArray(count, reader.ReadUInt16);
+        }
+
+        internal static R[] ReadArray<T, R>(this EndianReader reader, T[] offsetItems, Func<T, R> cb)
+        {
+            var items = new R[offsetItems.Length];
+            for (int i = 0; i < offsetItems.Length; i++)
+            {
+                items[i] = cb.Invoke(offsetItems[i]);
+            }
+            return items;
         }
         internal static int ReadUInt24(this BinaryReader reader)
         {

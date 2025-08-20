@@ -3,13 +3,13 @@
     public readonly struct DataMapRecord
     {
         public readonly string Tag;
-        public readonly uint DataOffset;
-        public readonly uint DataLength;
+        public readonly uint Offset;
+        public readonly uint Length;
         public DataMapRecord(string tag, uint dataOffset, uint dataLength)
         {
             Tag = tag;
-            DataOffset = dataOffset;
-            DataLength = dataLength;
+            Offset = dataOffset;
+            Length = dataLength;
         }
     }
 }

@@ -2,11 +2,11 @@
 {
     public struct SmallGlyphMetrics
     {
-        public byte height;
-        public byte width;
-        public sbyte bearingX;
-        public sbyte bearingY;
-        public byte advance;
+        public byte Height;
+        public byte Width;
+        public sbyte BearingX;
+        public sbyte BearingY;
+        public byte Advance;
 
         public const int SIZE = 5; //size of SmallGlyphMetrics
     }

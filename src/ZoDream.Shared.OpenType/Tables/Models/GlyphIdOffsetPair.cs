@@ -2,12 +2,12 @@
 {
     public readonly struct GlyphIdOffsetPair
     {
-        public readonly ushort glyphId;
-        public readonly ushort offset;
+        public readonly ushort GlyphId;
+        public readonly ushort Offset;
         public GlyphIdOffsetPair(ushort glyphId, ushort offset)
         {
-            this.glyphId = glyphId;
-            this.offset = offset;
+            GlyphId = glyphId;
+            Offset = offset;
         }
     }
 }

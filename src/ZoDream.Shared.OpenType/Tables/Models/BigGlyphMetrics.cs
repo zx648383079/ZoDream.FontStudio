@@ -2,16 +2,16 @@
 {
     public struct BigGlyphMetrics
     {
-        public byte height;
-        public byte width;
+        public byte Height;
+        public byte Width;
 
-        public sbyte horiBearingX;
-        public sbyte horiBearingY;
-        public byte horiAdvance;
+        public sbyte HorizontalBearingX;
+        public sbyte HorizontalBearingY;
+        public byte HorizontalAdvance;
 
-        public sbyte vertBearingX;
-        public sbyte vertBearingY;
-        public byte vertAdvance;
+        public sbyte VerticalBearingX;
+        public sbyte VerticalBearingY;
+        public byte VerticalAdvance;
 
         public const int SIZE = 8; //size of BigGlyphMetrics
     }

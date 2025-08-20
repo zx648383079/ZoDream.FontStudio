@@ -7,5 +7,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public const string TableName = "LTSH";
 
         public string Name => TableName;
+
+        public byte[] yPixels { get; internal set; }
     }
 }

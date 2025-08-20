@@ -38,23 +38,17 @@ namespace ZoDream.Shared.OpenType.Converters
                 res.UlUnicodeRange3 = reader.ReadUInt32();
                 res.UlUnicodeRange4 = reader.ReadUInt32();
             }
-
-            //CHAR 	achVendID[4] 	 
+ 
             res.AchVendID = reader.ReadUInt32();
-            //USHORT 	fsSelection 	 
-            //USHORT 	usFirstCharIndex 	 
-            //USHORT 	usLastCharIndex 	 
             res.FsSelection = reader.ReadUInt16();
             res.UsFirstCharIndex = reader.ReadUInt16();
             res.UsLastCharIndex = reader.ReadUInt16();
-            //SHORT 	sTypoAscender 	 
-            //SHORT 	sTypoDescender 	 
-            //SHORT 	sTypoLineGap 	 
+          
+
             res.STypoAscender = reader.ReadInt16();
             res.STypoDescender = reader.ReadInt16();
             res.STypoLineGap = reader.ReadInt16();
-            //USHORT 	usWinAscent 	 
-            //USHORT 	usWinDescent
+            
             res.UsWinAscent = reader.ReadUInt16();
             res.UsWinDescent = reader.ReadUInt16();
 

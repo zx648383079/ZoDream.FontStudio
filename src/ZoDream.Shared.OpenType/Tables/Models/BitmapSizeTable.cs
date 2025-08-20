@@ -7,8 +7,8 @@
         public uint NumberOfIndexSubTables;
         public uint ColorRef;
 
-        public SbitLineMetrics Hori;
-        public SbitLineMetrics Vert;
+        public SbitLineMetrics Horizontal;
+        public SbitLineMetrics Vertical;
 
         public ushort StartGlyphIndex;
         public ushort EndGlyphIndex;

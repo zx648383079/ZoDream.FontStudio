@@ -8,7 +8,7 @@ namespace ZoDream.Shared.OpenType.Tables
 
         public string Name => TableName;
 
-        public ValueRecord[] valueRecords;
-        public ItemVariationStoreTable itemVariationStore;
+        public ValueRecord[] ValueRecords;
+        public ItemVariationStoreTable ItemVariationStore;
     }
 }

@@ -5,8 +5,8 @@
         public override int Format => 4;
 
 
-        public AxisValueRecord[] _axisValueRecords;
-        public ushort flags;
-        public ushort valueNameId;
+        public AxisValueRecord[] ValueRecords;
+        public ushort Flags;
+        public ushort ValueNameId;
     }
 }

@@ -1,11 +1,15 @@
-﻿namespace ZoDream.Shared.OpenType.Tables
+﻿using System.Collections.Generic;
+
+namespace ZoDream.Shared.OpenType.Tables
 {
     public abstract class IndexSubTableBase
     {
-        public IndexSubHeader header;
+        public IndexSubHeader Header;
 
         public abstract int SubTypeNo { get; }
-        public ushort firstGlyphIndex;
-        public ushort lastGlyphIndex;
+        public ushort FirstGlyphIndex;
+        public ushort LastGlyphIndex;
+
+        public abstract void BuildGlyphList(List<GlyphData> glyphList);
     }
 }

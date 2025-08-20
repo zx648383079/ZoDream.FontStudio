@@ -8,8 +8,6 @@ namespace ZoDream.Shared.OpenType.Tables
 
         public string Name => TableName;
 
-        public byte VersionMajor { get; set; }
-        public byte VersionMinor { get; set; }
         public short VertTypoAscender { get; set; }
         public short VertTypoDescender { get; set; }
         public short VertTypoLineGap { get; set; }

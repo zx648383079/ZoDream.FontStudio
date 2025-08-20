@@ -28,9 +28,9 @@ namespace ZoDream.Shared.OpenType.Converters
             {
                 var axisRecord = new AxisRecord();
                 axisRecords[i] = axisRecord;
-                axisRecord.axisTagName = reader.ReadString(4); //4
-                axisRecord.axisNameId = reader.ReadUInt16(); //2
-                axisRecord.axisOrdering = reader.ReadUInt16(); //2
+                axisRecord.Tag = reader.ReadString(4); //4
+                axisRecord.NameId = reader.ReadUInt16(); //2
+                axisRecord.Ordering = reader.ReadUInt16(); //2
 
 
                 //***
@@ -88,12 +88,12 @@ namespace ZoDream.Shared.OpenType.Converters
         {
             var res = new AxisValueTableFmt4();
             ushort axisCount = reader.ReadUInt16();
-            res.flags = reader.ReadUInt16();
-            res.valueNameId = reader.ReadUInt16();
-            res._axisValueRecords = new AxisValueRecord[axisCount];
+            res.Flags = reader.ReadUInt16();
+            res.ValueNameId = reader.ReadUInt16();
+            res.ValueRecords = new AxisValueRecord[axisCount];
             for (int i = 0; i < axisCount; ++i)
             {
-                res._axisValueRecords[i] = new AxisValueRecord(
+                res.ValueRecords[i] = new AxisValueRecord(
                     reader.ReadUInt16(),
                     reader.ReadFixed());
             }
@@ -103,33 +103,33 @@ namespace ZoDream.Shared.OpenType.Converters
         private AxisValueTableBase ReadAxisValueFmt3(EndianReader reader)
         {
             var res = new AxisValueTableFmt3();
-            res.axisIndex = reader.ReadUInt16();
-            res.flags = reader.ReadUInt16();
-            res.valueNameId = reader.ReadUInt16();
-            res.value = reader.ReadFixed();
-            res.linkedValue = reader.ReadFixed();
+            res.Index = reader.ReadUInt16();
+            res.Flags = reader.ReadUInt16();
+            res.ValueNameId = reader.ReadUInt16();
+            res.Value = reader.ReadFixed();
+            res.LinkedValue = reader.ReadFixed();
             return res;
         }
 
         private AxisValueTableBase ReadAxisValueFmt2(EndianReader reader)
         {
             var res = new AxisValueTableFmt2();
-            res.axisIndex = reader.ReadUInt16();
-            res.flags = reader.ReadUInt16();
-            res.valueNameId = reader.ReadUInt16();
-            res.nominalValue = reader.ReadFixed();
-            res.rangeMinValue = reader.ReadFixed();
-            res.rangeMaxValue = reader.ReadFixed();
+            res.Index = reader.ReadUInt16();
+            res.Flags = reader.ReadUInt16();
+            res.ValueNameId = reader.ReadUInt16();
+            res.NominalValue = reader.ReadFixed();
+            res.RangeMinValue = reader.ReadFixed();
+            res.RangeMaxValue = reader.ReadFixed();
             return res;
         }
 
         private AxisValueTableBase ReadAxisValueFmt1(EndianReader reader)
         {
             var res = new AxisValueTableFmt1();
-            res.axisIndex = reader.ReadUInt16();
-            res.flags = reader.ReadUInt16();
-            res.valueNameId = reader.ReadUInt16();
-            res.value = reader.ReadFixed();
+            res.Index = reader.ReadUInt16();
+            res.Flags = reader.ReadUInt16();
+            res.ValueNameId = reader.ReadUInt16();
+            res.Value = reader.ReadFixed();
             return res;
         }
 

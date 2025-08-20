@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZoDream.Shared.OpenType
+namespace ZoDream.Shared.OpenType.Postscript
 {
-    public class Postscript
+    internal class Bytecode
     {
     }
 }

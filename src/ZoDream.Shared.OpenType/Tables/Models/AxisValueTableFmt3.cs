@@ -5,10 +5,10 @@
         public override int Format => 3;
 
 
-        public ushort axisIndex;
-        public ushort flags;
-        public ushort valueNameId;
-        public float value;
-        public float linkedValue;
+        public ushort Index;
+        public ushort Flags;
+        public ushort ValueNameId;
+        public float Value;
+        public float LinkedValue;
     }
 }

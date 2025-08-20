@@ -1,15 +1,12 @@
-﻿using System.IO;
-
-namespace ZoDream.Shared.OpenType.Tables
+﻿namespace ZoDream.Shared.OpenType.Tables
 {
     public class SvgDocument
     {
         public ushort StartGlyphID;
         public ushort EndGlyphID;
-        public uint SvgDocOffset;
-        public uint SvgDocLength;
+        public uint Offset;
+        public int Length;
 
-        public Stream Buffer;
-        public bool Compressed;
+        public string Text;
     }
 }

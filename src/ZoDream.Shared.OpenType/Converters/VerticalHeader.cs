@@ -10,9 +10,8 @@ namespace ZoDream.Shared.OpenType.Converters
         public override VerticalHeaderTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
             var res = new VerticalHeaderTable();
-            var version = reader.ReadUInt32();
-            res.VersionMajor = (byte)(version >> 16);
-            res.VersionMinor = (byte)(version >> 8);
+            var majorVersion = reader.ReadUInt16();
+            var minorVersion = reader.ReadUInt16();
 
             res.VertTypoAscender = reader.ReadInt16();
             res.VertTypoDescender = reader.ReadInt16();

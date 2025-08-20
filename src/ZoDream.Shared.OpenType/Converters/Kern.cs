@@ -11,8 +11,7 @@ namespace ZoDream.Shared.OpenType.Converters
         {
             var res = new KernTable();
             ushort verion = reader.ReadUInt16();
-            ushort nTables = reader.ReadUInt16();//subtable count
-            //TODO: review here
+            ushort nTables = reader.ReadUInt16();
             if (nTables > 1)
             {
                 throw new NotSupportedException($"Support for {nTables} kerning tables");
@@ -24,13 +23,8 @@ namespace ZoDream.Shared.OpenType.Converters
                 ushort len = reader.ReadUInt16(); //Length of the subtable, in bytes (including this header).
                 var kerCoverage = new KernCoverage(reader.ReadUInt16());//What type of information is contained in this table.
 
-                //The coverage field is divided into the following sub-fields, with sizes given in bits:
-                //----------------------------------------------
-                //Format of the subtable.
-                //Only formats 0 and 2 have been defined.
-                //Formats 1 and 3 through 255 are reserved for future use.
 
-                switch (kerCoverage.format)
+                switch (kerCoverage.Format)
                 {
                     case 0:
                         res.KernSubTables.Add(ReadSubTableFormat0(reader, len - (3 * 2)));//3 header field * 2 byte each

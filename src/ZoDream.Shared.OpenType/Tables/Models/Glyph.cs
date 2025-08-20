@@ -21,6 +21,11 @@ namespace ZoDream.Shared.OpenType.Tables
         internal ushort MarkClassDef { get; set; }              //FOUND in all mode
         internal readonly FontGlyphData Glyph;
 
+        internal uint BitmapStreamOffset { get; private set; }
+        internal uint BitmapFormat { get; set; }
+        public uint StreamLen;            //FOUND in all mode (if font has this data)
+        public ushort ImgFormat;          //FOUND in all mode (if font has this data)
+
         internal GlyphData(
             GlyphPoint[] glyphPoints,
             ushort[] contourEndPoints,
@@ -39,6 +44,16 @@ namespace ZoDream.Shared.OpenType.Tables
         public GlyphData(FontGlyphData cff1Glyph, ushort glyphIndex)
         {
             Glyph = cff1Glyph;
+            GlyphIndex = glyphIndex;
+        }
+
+
+        public GlyphData(ushort glyphIndex, uint streamOffset, uint streamLen, ushort imgFormat)
+        {
+            //_bmpGlyphSource = bmpGlyphSource;
+            BitmapStreamOffset = streamOffset;
+            StreamLen = streamLen;
+            ImgFormat = imgFormat;
             GlyphIndex = glyphIndex;
         }
     }

@@ -20,7 +20,7 @@ namespace ZoDream.Shared.OpenType.Converters
             //(1)
             reader.BaseStream.Position = beginAt + mathConstants_offset;
             res.ConstTable = ReadMathConstantsTable(reader);
-            //
+            
             //(2)
             reader.BaseStream.Position = beginAt + mathGlyphInfo_offset;
             long startAt = reader.BaseStream.Position;
@@ -39,17 +39,6 @@ namespace ZoDream.Shared.OpenType.Converters
             res.TopAccentAttachmentTable = ReadMathTopAccentAttachment(reader);
             //
 
-
-            //TODO:...
-            //The glyphs covered by this table are to be considered extended shapes.
-            //These glyphs are variants extended in the vertical direction, e.g.,
-            //to match height of another part of the formula.
-            //Because their dimensions may be very large in comparison with normal glyphs in the glyph set,
-            //the standard positioning algorithms will not produce the best results when applied to them.
-            //In the vertical direction, other formula elements will be positioned not relative to those glyphs,
-            //but instead to the ink box of the subexpression containing them
-
-            //.... 
 
             //(2.3)
             if (offsetTo_Extended_Shape_coverage_Table > 0)

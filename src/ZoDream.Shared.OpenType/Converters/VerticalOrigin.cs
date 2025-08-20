@@ -9,8 +9,16 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override VerticalOriginTable? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            // TODO
-            return new VerticalOriginTable();
+            var res = new VerticalOriginTable();
+            var majorVersion = reader.ReadUInt16();
+            var minorVersion = reader.ReadUInt16();
+            res.DefaultVertOriginY = reader.ReadInt16();
+
+            var numVertOriginYMetrics  = reader.ReadUInt16();
+            res.VertOriginYMetrics = reader.ReadArray(numVertOriginYMetrics, () => {
+                return new VertOriginYMetrics(reader.ReadUInt16(), reader.ReadInt16());
+            });
+            return res;
         }
 
         public override void Write(EndianWriter writer, VerticalOriginTable data, Type objectType, ITypefaceSerializer serializer)

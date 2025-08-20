@@ -9,8 +9,24 @@ namespace ZoDream.Shared.OpenType.Converters
     {
         public override Pcl5Table? Read(EndianReader reader, Type objectType, ITypefaceSerializer serializer)
         {
-            // TODO
-            return new Pcl5Table();
+            var res = new Pcl5Table();
+            var majorVersion  = reader.ReadUInt16();
+            var minorVersion = reader.ReadUInt16();
+            res.FontNumber = reader.ReadUInt32();
+            res.Pitch = reader.ReadUInt16();
+            res.XHeight = reader.ReadUInt16();
+            res.Style  = reader.ReadUInt16();
+            res.TypeFamily  = reader.ReadUInt16();
+            res.CapHeight = reader.ReadUInt16();
+            res.SymbolSet  = reader.ReadUInt16();
+            res.Typeface = reader.ReadBytes(16);
+            res.CharacterComplement = reader.ReadBytes(8);
+            res.FileName = reader.ReadBytes(6);
+            res.StrokeWeight = reader.ReadSByte();
+            res.WidthType = reader.ReadSByte();
+            res.SerifStyle = reader.ReadByte();
+            _ = reader.ReadByte();
+            return res;
         }
 
         public override void Write(EndianWriter writer, Pcl5Table data, Type objectType, ITypefaceSerializer serializer)

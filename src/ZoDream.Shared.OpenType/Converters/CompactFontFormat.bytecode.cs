@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection.PortableExecutable;
 using System.Text;
-using ZoDream.Shared.Font;
 using ZoDream.Shared.IO;
 using ZoDream.Shared.OpenType.CompactFontFormat;
 using ZoDream.Shared.OpenType.Tables;

@@ -22,7 +22,7 @@ namespace ZoDream.Shared.OpenType.Converters
             if (res.Version == 2)
             {
                 var numOfGlyphs = reader.ReadUInt16();
-                var glyphNameIndice = reader.ReadArray(numOfGlyphs, reader.ReadUInt16);
+                var glyphNameIndice = reader.ReadUInt16Array(numOfGlyphs);
                 var glyphNames = new string[numOfGlyphs];
                 for (int i = 0; i < glyphNameIndice.Length; i++)
                 {

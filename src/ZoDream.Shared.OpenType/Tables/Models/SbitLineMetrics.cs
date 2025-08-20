@@ -2,21 +2,21 @@
 {
     public struct SbitLineMetrics
     {
-        public sbyte ascender;
-        public sbyte descender;
-        public byte widthMax;
+        public sbyte Ascender;
+        public sbyte Descender;
+        public byte WidthMax;
 
-        public sbyte caretSlopeNumerator;
-        public sbyte caretSlopeDenominator;
-        public sbyte caretOffset;
+        public sbyte CaretSlopeNumerator;
+        public sbyte CaretSlopeDenominator;
+        public sbyte CaretOffset;
 
-        public sbyte minOriginSB;
-        public sbyte minAdvanceSB;
+        public sbyte MinOriginSB;
+        public sbyte MinAdvanceSB;
 
-        public sbyte maxBeforeBL;
-        public sbyte minAfterBL;
+        public sbyte MaxBeforeBL;
+        public sbyte MinAfterBL;
 
-        public sbyte pad1;
-        public sbyte pad2;
+        public sbyte Pad1;
+        public sbyte Pad2;
     }
 }
