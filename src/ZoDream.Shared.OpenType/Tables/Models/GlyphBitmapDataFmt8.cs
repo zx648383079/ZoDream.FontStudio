@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using ZoDream.Shared.IO;
+using ZoDream.Shared.OpenType.Converters;
 
 namespace ZoDream.Shared.OpenType.Tables
 {
@@ -13,7 +14,10 @@ namespace ZoDream.Shared.OpenType.Tables
 
         public void FillGlyphInfo(EndianReader reader, GlyphData bitmapGlyph)
         {
-            throw new System.NotImplementedException();
+            var metrics = MetricsConverter.ReadSmall(reader);
+            Pad = reader.ReadByte();
+            var numComponents = reader.ReadUInt16();
+            Components = reader.ReadArray(numComponents, () => MetricsConverter.ReadComponent(reader));
         }
 
         public void ReadRawBitmap(EndianReader reader, GlyphData bitmapGlyph, Stream output)

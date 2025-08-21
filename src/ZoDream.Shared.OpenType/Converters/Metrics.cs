@@ -61,9 +61,16 @@ namespace ZoDream.Shared.OpenType.Converters
             };
         }
 
+        internal static EbdtComponent ReadComponent(EndianReader reader)
+        {
+            return new EbdtComponent(reader.ReadUInt16(), reader.ReadSByte(), reader.ReadSByte());
+        }
+
         public override void Write(EndianWriter writer, SmallGlyphMetrics data, Type objectType, ITypefaceSerializer serializer)
         {
             throw new NotImplementedException();
         }
+
+    
     }
 }
