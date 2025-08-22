@@ -24,5 +24,25 @@ namespace ZoDream.FontStudio.Controls
         {
             InitializeComponent();
         }
+
+        private void PART_Canvas_PaintSurface(object sender, SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs e)
+        {
+
+        }
+
+        private void PART_Canvas_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void PART_Target_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var control = sender as Canvas;
+            var p = e.GetPosition(control);
+            var joint = new PathJointController();
+            Canvas.SetLeft(joint, p.X);
+            Canvas.SetTop(joint, p.X);
+            control.Children.Add(joint);
+        }
     }
 }

@@ -15,9 +15,12 @@
         VerticalScrollBarVisibility="Auto"
         VerticalScrollMode="Auto"
         ZoomMode="Enabled">
-        <skia:SKXamlCanvas
-            x:Name="CanvasTarget"
-            PaintSurface="CanvasTarget_PaintSurface"
-            Tapped="CanvasTarget_Tapped" />
+        <Grid>
+            <skia:SKXamlCanvas
+                x:Name="PART_Canvas"
+                PaintSurface="PART_Canvas_PaintSurface"
+                Tapped="PART_Canvas_Tapped" />
+            <Canvas x:Name="PART_Target" Tapped="PART_Target_Tapped" />
+        </Grid>
     </ScrollViewer>
 </UserControl>

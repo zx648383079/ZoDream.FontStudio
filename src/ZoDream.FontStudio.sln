@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.Font", "ZoDr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.UndoRedo", "..\shared\ZoDream.Shared.UndoRedo\ZoDream.Shared.UndoRedo.csproj", "{4779350D-A68A-DF4B-E10F-90D83EB32669}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.ImageEditor", "ZoDream.Shared.ImageEditor\ZoDream.Shared.ImageEditor.csproj", "{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -103,6 +105,18 @@ Global
 		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|x64.Build.0 = Release|Any CPU
 		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|x86.ActiveCfg = Release|Any CPU
 		{4779350D-A68A-DF4B-E10F-90D83EB32669}.Release|x86.Build.0 = Release|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Debug|x64.Build.0 = Debug|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Debug|x86.Build.0 = Debug|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|ARM64.Build.0 = Release|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|x64.ActiveCfg = Release|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|x64.Build.0 = Release|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,6 +20,7 @@
     <None Remove="Pages\WorkspacePage.xaml" />
     <None Remove="Themes\BaseStyle.xaml" />
     <None Remove="Themes\DarkTheme.xaml" />
+    <None Remove="Themes\Editor.xaml" />
     <None Remove="Themes\Generic.xaml" />
     <None Remove="Themes\LightTheme.xaml" />
     <None Remove="Themes\TitleBar.xaml" />
@@ -58,9 +59,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\ZoDream.Shared.UndoRedo\ZoDream.Shared.UndoRedo.csproj" />
+    <ProjectReference Include="..\ZoDream.Shared.ImageEditor\ZoDream.Shared.ImageEditor.csproj" />
     <ProjectReference Include="..\ZoDream.Shared.OpenType\ZoDream.Shared.OpenType.csproj" />
     <ProjectReference Include="..\ZoDream.Shared.WebType\ZoDream.Shared.WebType.csproj" />
     <ProjectReference Include="..\ZoDream.Shared\ZoDream.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Themes\Editor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\ImageEditor.xaml">

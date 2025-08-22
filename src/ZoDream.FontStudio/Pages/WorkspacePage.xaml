@@ -81,10 +81,7 @@
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
-            <TreeView
-                ItemTemplateSelector="{StaticResource LayerItemTemplateSelector}"
-                ItemsSource="{Binding LayerItems}"
-                SelectedItem="{Binding SelectedLayer, Mode=TwoWay}" />
+            <TreeView ItemsSource="{Binding GlyphItems}" SelectedItem="{Binding SelectedLayer, Mode=TwoWay}" />
 
             <ctl:ImageEditor Grid.Column="1" />
 
@@ -95,7 +92,7 @@
                 </Grid.RowDefinitions>
                 <ctl:ImageEditor />
 
-                <ListView Grid.Row="1" />
+                <ListView Grid.Row="1" ItemsSource="{Binding LayerItems}" />
             </Grid>
         </Grid>
     </Grid>
