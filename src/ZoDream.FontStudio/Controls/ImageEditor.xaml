@@ -15,12 +15,14 @@
         VerticalScrollBarVisibility="Auto"
         VerticalScrollMode="Auto"
         ZoomMode="Enabled">
-        <Grid>
-            <skia:SKXamlCanvas
-                x:Name="PART_Canvas"
-                PaintSurface="PART_Canvas_PaintSurface"
-                Tapped="PART_Canvas_Tapped" />
-            <Canvas x:Name="PART_Target" Tapped="PART_Target_Tapped" />
-        </Grid>
+        <skia:SKXamlCanvas
+            x:Name="PART_Canvas"
+            ManipulationCompleted="PART_Canvas_ManipulationCompleted"
+            ManipulationDelta="PART_Canvas_ManipulationDelta"
+            ManipulationStarted="PART_Canvas_ManipulationStarted"
+            PaintSurface="PART_Canvas_PaintSurface"
+            PointerMoved="PART_Canvas_PointerMoved"
+            PointerPressed="PART_Canvas_PointerPressed"
+            PointerReleased="PART_Canvas_PointerReleased" />
     </ScrollViewer>
 </UserControl>

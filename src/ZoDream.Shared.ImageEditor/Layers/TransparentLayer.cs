@@ -16,6 +16,8 @@ namespace ZoDream.Shared.ImageEditor.Layers
 
         private SKSurface? _surface;
 
+        public Vector4 Bound => Vector4.Zero;
+
         public void Resize(Vector2 size)
         {
             Invalidate();

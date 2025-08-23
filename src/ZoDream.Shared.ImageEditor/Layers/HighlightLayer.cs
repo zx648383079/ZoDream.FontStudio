@@ -93,12 +93,12 @@ namespace ZoDream.Shared.ImageEditor.Layers
 
         public bool Contains(Vector2 point)
         {
-            throw new System.NotImplementedException();
+            return false;
         }
 
         public SKBitmap? CreateThumbnail(Vector2 size)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
     }
 }

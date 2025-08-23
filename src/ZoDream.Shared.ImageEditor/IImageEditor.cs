@@ -9,22 +9,7 @@ namespace ZoDream.Shared.ImageEditor
     {
         public Vector2 Size { get; }
 
-        public void Add(IEnumerable<IImageLayer> items);
-
-        public void Add(IImageLayer layer);
-
-        /// <summary>
-        /// 移除图层并销毁
-        /// </summary>
-        /// <param name="layer"></param>
-        public void Remove(IImageLayer layer);
-
-        /// <summary>
-        /// 清除全部图层
-        /// </summary>
-        public void Clear();
-
-        public void Tap(float x, float y);
+        public void Touch(Vector2 point);
 
         public void Select(IImageLayer? layer);
 

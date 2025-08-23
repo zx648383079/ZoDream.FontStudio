@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZoDream.Shared.ImageEditor
 {
-    public interface ICommandLayer
+    public interface ICommandLayer : IDisposable
     {
         public void Resize(Vector2 size);
         /// <summary>

@@ -9,5 +9,9 @@ namespace ZoDream.FontStudio.ViewModels
 {
     public partial class WorkspaceViewModel : ObservableObject
     {
+        public WorkspaceViewModel()
+        {
+            
+        }
     }
 }

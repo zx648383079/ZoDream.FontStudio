@@ -1,0 +1,164 @@
+﻿using Microsoft.UI.Xaml.Controls;
+using SkiaSharp;
+using System;
+using System.Linq;
+using System.Windows.Input;
+using ZoDream.FontStudio.Dialogs;
+using ZoDream.Shared.ImageEditor;
+
+namespace ZoDream.FontStudio.ViewModels
+{
+    public partial class WorkspaceViewModel
+    {
+
+        public ICommand DragImageCommand { get; private set; }
+        public ICommand LayerSelectedCommand { get; private set; }
+
+        public ICommand NewCommand { get; private set; }
+        public ICommand OpenCommand { get; private set; }
+        public ICommand SaveCommand { get; private set; }
+        public ICommand SaveAsCommand { get; private set; }
+        public ICommand ImportCommand { get; private set; }
+        public ICommand ExportCommand { get; private set; }
+        public ICommand UndoCommand { get; private set; }
+        public ICommand RedoCommand { get; private set; }
+        public ICommand PropertyCommand { get; private set; }
+        public ICommand UnselectCommand { get; private set; }
+        public ICommand SelectTopCommand { get; private set; }
+        public ICommand SelectBottomCommand { get; private set; }
+        public ICommand SelectPreviousCommand { get; private set; }
+        public ICommand SelectNextCommand { get; private set; }
+        public ICommand CutCommand { get; private set; }
+        public ICommand CopyCommand { get; private set; }
+        public ICommand PasteCommand { get; private set; }
+
+        public ICommand OrderCommand { get; private set; }
+        public ICommand AddLayerCommand { get; private set; }
+
+
+        public ICommand ImportFolderCommand { get; private set; }
+        public ICommand DeleteLayerCommand { get; private set; }
+        public ICommand LayerApplyCommand { get; private set; }
+
+
+        public ICommand LayerPropertyCommand { get; private set; }
+        public ICommand LayerRotateCommand { get; private set; }
+        public ICommand LayerScaleCommand { get; private set; }
+        public ICommand LayerScaleXCommand { get; private set; }
+        public ICommand LayerScaleYCommand { get; private set; }
+        public ICommand LayerVisibleCommand { get; private set; }
+        public ICommand LayerVisibleToggleCommand { get; private set; }
+        public ICommand LayerHiddenCommand { get; private set; }
+        public ICommand AllVisibleCommand { get; private set; }
+        public ICommand OtherHiddenCommand { get; private set; }
+        public ICommand OtherVisibleCommand { get; private set; }
+        public ICommand LayerLockCommand { get; private set; }
+        public ICommand LayerLockToggleCommand { get; private set; }
+        public ICommand LayerUnlockCommand { get; private set; }
+        public ICommand AllUnlockCommand { get; private set; }
+        public ICommand LayerRenameCommand { get; private set; }
+        public ICommand LayerHorizontalLeftCommand { get; private set; }
+        public ICommand LayerHorizontalCenterCommand { get; private set; }
+        public ICommand LayerHorizontalRightCommand { get; private set; }
+
+        public ICommand LayerVerticalTopCommand { get; private set; }
+        public ICommand LayerVerticalMidCommand { get; private set; }
+        public ICommand LayerVerticalBottomCommand { get; private set; }
+        public ICommand LayerHorizontalFlipCommand { get; private set; }
+        public ICommand LayerVerticalFlipCommand { get; private set; }
+        public ICommand LayerMoveTopCommand { get; private set; }
+        public ICommand LayerMoveUpCommand { get; private set; }
+        public ICommand LayerMoveDownCommand { get; private set; }
+        public ICommand LayerMoveBottomCommand { get; private set; }
+        public ICommand LayerMoveParentCommand { get; private set; }
+        public ICommand AboutCommand { get; private set; }
+
+        private void TapAddLayer(string? cmd)
+        {
+            
+        }
+
+
+        private async void TapAbout()
+        {
+            var dialog = new AboutDialog();
+            await App.ViewModel.OpenDialogAsync(dialog);
+        }
+
+        private void TapNew()
+        {
+            LayerItems.Clear();
+            //Instance?.Clear();
+            Instance?.Unselect();
+            Instance?.Invalidate();
+            
+        }
+
+        private void TapOpen()
+        {
+            TapNew();
+            TapImportFile();
+        }
+
+        private void TapUndo()
+        {
+            UndoRedo.Undo();
+        }
+        private void TapRedo() 
+        {
+            UndoRedo.ReverseUndo();
+        }
+        
+        private void TapProperty()
+        {
+            //var dialog = new PropertyDialog();
+            //dialog.ViewModel.Load(Instance);
+            //await App.ViewModel.OpenDialogAsync(dialog);
+        }
+        private void TapUnselect(object? _)
+        {
+            Instance!.Unselect();
+            SelectedLayer = null;
+        }
+
+
+        private void TapSelectTop()
+        {
+            if (LayerItems.Count == 0)
+            {
+                return;
+            }
+            var layer = SelectedLayer;
+        }
+
+        private void TapSelectBottom()
+        {
+            if (LayerItems.Count == 0)
+            {
+                return;
+            }
+            var layer = SelectedLayer;
+        }
+
+
+        private void TapSelectPrevious()
+        {
+            if (LayerItems.Count == 0 || SelectedLayer is null)
+            {
+                return;
+            }
+            var layer = SelectedLayer;
+   
+        }
+
+        private void TapSelectNext()
+        {
+            if (LayerItems.Count == 0 || SelectedLayer is null)
+            {
+                return;
+            }
+            var layer = SelectedLayer;
+      
+        }
+    }
+}

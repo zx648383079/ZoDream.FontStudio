@@ -15,6 +15,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Controls\ImageEditor.xaml" />
+    <None Remove="Dialogs\AboutDialog.xaml" />
     <None Remove="Dialogs\ConfirmDialog.xaml" />
     <None Remove="Pages\StartupPage.xaml" />
     <None Remove="Pages\WorkspacePage.xaml" />
@@ -63,6 +64,11 @@
     <ProjectReference Include="..\ZoDream.Shared.OpenType\ZoDream.Shared.OpenType.csproj" />
     <ProjectReference Include="..\ZoDream.Shared.WebType\ZoDream.Shared.WebType.csproj" />
     <ProjectReference Include="..\ZoDream.Shared\ZoDream.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\AboutDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\Editor.xaml">

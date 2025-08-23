@@ -1,17 +1,8 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using SkiaSharp.Views.Windows;
+using System.Numerics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,26 +14,68 @@ namespace ZoDream.FontStudio.Controls
         public ImageEditor()
         {
             InitializeComponent();
+            Loaded += ImageEditor_Loaded;
+        }
+
+        public SKXamlCanvas CanvasTarget => PART_Canvas;
+
+        private readonly double _dpiScale = App.ViewModel.GetDpiScaleFactorFromWindow();
+        private bool _booted = false;
+
+        private void ImageEditor_Loaded(object sender, RoutedEventArgs e)
+        {
+            _booted = true;
+            Resize(new Vector2((float)(ActualWidth * _dpiScale), (float)(ActualHeight * _dpiScale)));
         }
 
         private void PART_Canvas_PaintSurface(object sender, SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs e)
         {
-
+            if (!_booted)
+            {
+                ImageEditor_Loaded(this, null);
+            }
+            Paint(e.Surface.Canvas, e.Info);
         }
 
-        private void PART_Canvas_Tapped(object sender, TappedRoutedEventArgs e)
-        {
 
+        private void PART_Canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            var target = (UIElement)sender;
+            var point = e.GetCurrentPoint(target).Position;
+            OnPointerPressed(new Vector2((float)(point.X * _dpiScale), (float)(point.Y * _dpiScale)));
         }
 
-        private void PART_Target_Tapped(object sender, TappedRoutedEventArgs e)
+        private void PART_Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            var control = sender as Canvas;
-            var p = e.GetPosition(control);
-            var joint = new PathJointController();
-            Canvas.SetLeft(joint, p.X);
-            Canvas.SetTop(joint, p.X);
-            control.Children.Add(joint);
+            var target = (UIElement)sender;
+            var point = e.GetCurrentPoint(target).Position;
+            OnPointerMoved(new Vector2((float)(point.X * _dpiScale), (float)(point.Y * _dpiScale)));
+        }
+
+        private void PART_Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            OnPointerReleased();
+        }
+
+        private void PART_Canvas_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            OnPointerPressed(new((float)(e.Position.X * _dpiScale), (float)(e.Position.Y * _dpiScale)));
+        }
+
+        private void PART_Canvas_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            OnPointerPressed(new((float)(e.Position.X * _dpiScale), (float)(e.Position.Y * _dpiScale)));
+        }
+
+        private void PART_Canvas_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            OnPointerReleased();
+        }
+
+        private void ResizeWithControl(Vector2 size)
+        {
+            CanvasTarget.Width = size.X / _dpiScale;
+            CanvasTarget.Height = size.Y / _dpiScale;
         }
     }
 }
