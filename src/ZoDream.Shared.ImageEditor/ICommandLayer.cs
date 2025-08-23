@@ -1,11 +1,11 @@
-﻿using System;
-using System.Numerics;
+﻿using SkiaSharp;
+using System;
 
 namespace ZoDream.Shared.ImageEditor
 {
     public interface ICommandLayer : IDisposable
     {
-        public void Resize(Vector2 size);
+        public void Resize(SKSize size);
         /// <summary>
         /// 设置面向的图层
         /// </summary>

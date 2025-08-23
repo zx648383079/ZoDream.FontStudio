@@ -1,7 +1,4 @@
 ﻿using SkiaSharp;
-using System;
-using System.Drawing;
-using System.Numerics;
 
 namespace ZoDream.Shared.ImageEditor.Layers
 {
@@ -31,14 +28,14 @@ namespace ZoDream.Shared.ImageEditor.Layers
             ColorF = SKColors.Blue
         };
         private SKSurface? _surface;
-        public Vector4 Bound { get; private set; } = Vector4.Zero;
+        public SKRect Bound { get; private set; } = SKRect.Empty;
 
-        public bool Contains(Vector2 point)
+        public bool Contains(SKPoint point)
         {
             return false;
         }
 
-        public SKBitmap? CreateThumbnail(Vector2 size)
+        public SKBitmap? CreateThumbnail(SKSize size)
         {
             return null;
         }
@@ -67,15 +64,15 @@ namespace ZoDream.Shared.ImageEditor.Layers
         private void RenderSurface()
         {
             var bound = Bound;
-            var info = new SKImageInfo((int)bound.Z, (int)bound.W);
+            var info = new SKImageInfo((int)bound.Width, (int)bound.Height);
             _surface = SKSurface.Create(info);
             var canvas = _surface.Canvas;
-            canvas.DrawRect(SKRect.Create(bound.X, bound.Y, bound.Z, bound.W), _paint);
+            canvas.DrawRect(bound, _paint);
             var jointHalf = (float)_jointSize / 2;
-            var jointX = bound.X - jointHalf;
-            var jointY = bound.Y - jointHalf;
-            var widthHalf = bound.Z / 2;
-            var heightHalf = bound.W / 2;
+            var jointX = bound.Left - jointHalf;
+            var jointY = bound.Top - jointHalf;
+            var widthHalf = bound.Width / 2;
+            var heightHalf = bound.Height / 2;
             for (int i = 0; i < 3; i++)
             {
                 for (var j = 0; j < 3; j++)
@@ -90,11 +87,11 @@ namespace ZoDream.Shared.ImageEditor.Layers
             }
         }
 
-        public void PointerMoved(Vector2 point)
+        public void PointerMoved(SKPoint point)
         {
         }
 
-        public void PointerPressed(Vector2 point)
+        public void PointerPressed(SKPoint point)
         {
         }
 
@@ -102,7 +99,7 @@ namespace ZoDream.Shared.ImageEditor.Layers
         {
         }
 
-        public void Resize(Vector2 size)
+        public void Resize(SKSize size)
         {
         }
 

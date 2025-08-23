@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using System.Numerics;
 
 namespace ZoDream.Shared.ImageEditor.Layers
 {
@@ -16,9 +15,9 @@ namespace ZoDream.Shared.ImageEditor.Layers
 
         private SKSurface? _surface;
 
-        public Vector4 Bound => Vector4.Zero;
+        public SKRect Bound => SKRect.Empty;
 
-        public void Resize(Vector2 size)
+        public void Resize(SKSize size)
         {
             Invalidate();
         }
@@ -35,11 +34,11 @@ namespace ZoDream.Shared.ImageEditor.Layers
         private void RenderSurface()
         {
             var size = _editor.Size;
-            if (size.X == 0 || size.Y == 0)
+            if (size.Width == 0 || size.Height == 0)
             {
                 return;
             }
-            var info = new SKImageInfo((int)size.X, (int)size.Y);
+            var info = new SKImageInfo((int)size.Width, (int)size.Height);
             _surface = SKSurface.Create(info);
             var canvas = _surface.Canvas;
             canvas.Clear(SKColors.White);
@@ -49,8 +48,8 @@ namespace ZoDream.Shared.ImageEditor.Layers
                 Style = SKPaintStyle.Fill,
                 StrokeWidth = 0,
             };
-            var columnCount = size.X / _gridSize + 1;
-            var rowCount = size.Y / _gridSize + 1;
+            var columnCount = size.Width / _gridSize + 1;
+            var rowCount = size.Height / _gridSize + 1;
             for (var i = 0; i < columnCount; i++)
             {
                 for (var j = 0; j < rowCount; j++)
@@ -83,12 +82,12 @@ namespace ZoDream.Shared.ImageEditor.Layers
             _surface?.Dispose();
         }
 
-        public bool Contains(Vector2 point)
+        public bool Contains(SKPoint point)
         {
             return false;
         }
 
-        public SKBitmap? CreateThumbnail(Vector2 size)
+        public SKBitmap? CreateThumbnail(SKSize size)
         {
             return null;
         }

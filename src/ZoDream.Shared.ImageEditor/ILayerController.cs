@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Numerics;
+﻿using SkiaSharp;
+using System.Collections.Generic;
 
 namespace ZoDream.Shared.ImageEditor
 {
-    public interface IImageController : IEnumerable<IImageSource>
+    public interface ILayerController
     {
+        public IImageLayer? Current { get; }
+
         public void Add(IEnumerable<IImageLayer> items);
 
         public void Add(IImageLayer layer);
+        public void Add(IImageSource source);
 
         /// <summary>
         /// 移除图层并销毁
@@ -19,8 +22,10 @@ namespace ZoDream.Shared.ImageEditor
         /// 清除全部图层
         /// </summary>
         public void Clear();
-        public bool TryGet(Vector2 point, out IImageLayer? layer);
+        public bool TryGet(SKPoint point, out IImageLayer? layer);
 
-        public IEnumerable<IImageLayer> Get(Vector4 rect);
+        public IEnumerable<IImageLayer> Get(SKRect rect);
+
+        public void Paint(IImageCanvas canvas);
     }
 }

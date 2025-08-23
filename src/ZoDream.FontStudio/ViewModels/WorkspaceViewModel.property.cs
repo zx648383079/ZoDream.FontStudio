@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using ZoDream.FontStudio.Controls;
+using ZoDream.FontStudio.ViewModels.Models;
+using ZoDream.Shared.ImageEditor;
 using ZoDream.Shared.UndoRedo;
 
 namespace ZoDream.FontStudio.ViewModels
@@ -34,9 +36,9 @@ namespace ZoDream.FontStudio.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
-        private ObservableCollection<object> _glyphItems = [];
+        private ObservableCollection<GlyphGroupViewModel> _glyphItems = [];
 
-        public ObservableCollection<object> GlyphItems {
+        public ObservableCollection<GlyphGroupViewModel> GlyphItems {
             get => _glyphItems;
             set => SetProperty(ref _glyphItems, value);
         }
@@ -47,9 +49,9 @@ namespace ZoDream.FontStudio.ViewModels
 
         
 
-        private object? _selectedLayer;
+        private ImageLayerViewModel? _selectedLayer;
 
-        public object? SelectedLayer {
+        public ImageLayerViewModel? SelectedLayer {
             get => _selectedLayer;
             set {
                 SetProperty(ref _selectedLayer, value);
@@ -58,9 +60,9 @@ namespace ZoDream.FontStudio.ViewModels
         }
 
 
-        private ObservableCollection<object> _layerItems = [];
+        private ObservableCollection<IImageLayer> _layerItems = [];
 
-        public ObservableCollection<object> LayerItems {
+        public ObservableCollection<IImageLayer> LayerItems {
             get => _layerItems;
             set => SetProperty(ref _layerItems, value);
         }

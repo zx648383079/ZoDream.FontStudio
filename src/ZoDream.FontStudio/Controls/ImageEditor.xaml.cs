@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using SkiaSharp;
 using SkiaSharp.Views.Windows;
 using System.Numerics;
 
@@ -25,7 +26,7 @@ namespace ZoDream.FontStudio.Controls
         private void ImageEditor_Loaded(object sender, RoutedEventArgs e)
         {
             _booted = true;
-            Resize(new Vector2((float)(ActualWidth * _dpiScale), (float)(ActualHeight * _dpiScale)));
+            Resize(new SKSize((float)(ActualWidth * _dpiScale), (float)(ActualHeight * _dpiScale)));
         }
 
         private void PART_Canvas_PaintSurface(object sender, SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs e)
@@ -42,14 +43,14 @@ namespace ZoDream.FontStudio.Controls
         {
             var target = (UIElement)sender;
             var point = e.GetCurrentPoint(target).Position;
-            OnPointerPressed(new Vector2((float)(point.X * _dpiScale), (float)(point.Y * _dpiScale)));
+            OnPointerPressed(new((float)(point.X * _dpiScale), (float)(point.Y * _dpiScale)));
         }
 
         private void PART_Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             var target = (UIElement)sender;
             var point = e.GetCurrentPoint(target).Position;
-            OnPointerMoved(new Vector2((float)(point.X * _dpiScale), (float)(point.Y * _dpiScale)));
+            OnPointerMoved(new((float)(point.X * _dpiScale), (float)(point.Y * _dpiScale)));
         }
 
         private void PART_Canvas_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -72,10 +73,10 @@ namespace ZoDream.FontStudio.Controls
             OnPointerReleased();
         }
 
-        private void ResizeWithControl(Vector2 size)
+        private void ResizeWithControl(SKSize size)
         {
-            CanvasTarget.Width = size.X / _dpiScale;
-            CanvasTarget.Height = size.Y / _dpiScale;
+            CanvasTarget.Width = size.Width / _dpiScale;
+            CanvasTarget.Height = size.Height / _dpiScale;
         }
     }
 }

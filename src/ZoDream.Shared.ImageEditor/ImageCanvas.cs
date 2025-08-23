@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using System.Numerics;
 
 namespace ZoDream.Shared.ImageEditor
 {
@@ -7,27 +6,27 @@ namespace ZoDream.Shared.ImageEditor
     {
         public void DrawBitmap(SKBitmap source)
         {
-            DrawBitmap(source, Vector2.Zero);
+            canvas.DrawBitmap(source, SKPoint.Empty);
         }
 
-        public void DrawBitmap(SKBitmap source, Vector2 point)
+        public void DrawBitmap(SKBitmap source, SKPoint point)
         {
-            DrawBitmap(source, new Vector4(point.X, point.Y, source.Width, source.Height));
+            DrawBitmap(source, SKRect.Create(point, new SKSize(source.Width, source.Height)));
         }
 
-        public void DrawBitmap(SKBitmap source, Vector4 rect)
+        public void DrawBitmap(SKBitmap source, SKRect rect)
         {
-            canvas.DrawBitmap(source, SKRect.Create(rect.X, rect.Y, rect.Z, rect.W));
+            canvas.DrawBitmap(source, rect);
         }
 
-        public void DrawCircle(Vector2 center, float radius, SKPaint paint)
+        public void DrawCircle(SKPoint center, float radius, SKPaint paint)
         {
-            canvas.DrawCircle(center.X, center.Y, radius, paint);
+            canvas.DrawCircle(center, radius, paint);
         }
 
-        public void DrawOval(Vector2 center, Vector2 radius, SKPaint paint)
+        public void DrawOval(SKPoint center, SKSize radius, SKPaint paint)
         {
-            canvas.DrawOval(center.X, center.Y, radius.X, radius.Y, paint);
+            canvas.DrawOval(center, radius, paint);
         }
 
         public void DrawPath(SKPath path, SKPaint paint)
@@ -47,26 +46,26 @@ namespace ZoDream.Shared.ImageEditor
 
         public void DrawSurface(SKSurface surface)
         {
-            DrawSurface(surface, Vector2.Zero);
+            DrawSurface(surface, SKPoint.Empty);
         }
 
-        public void DrawSurface(SKSurface surface, Vector2 point)
+        public void DrawSurface(SKSurface surface, SKPoint point)
         {
-            canvas.DrawSurface(surface, point.X, point.Y);
+            canvas.DrawSurface(surface, point);
         }
 
-        public void DrawSurface(SKSurface surface, Vector4 rect)
+        public void DrawSurface(SKSurface surface, SKRect rect)
         {
-            canvas.DrawSurface(surface, rect.X, rect.Y);
+            canvas.DrawSurface(surface, rect.Left, rect.Top);
         }
 
-        public void DrawText(string text, Vector2 point, SKTextAlign textAlign, SKFont font, SKPaint paint)
+        public void DrawText(string text, SKPoint point, SKTextAlign textAlign, SKFont font, SKPaint paint)
         {
             if (string.IsNullOrWhiteSpace(text))
             {
                 return;
             }
-            canvas.DrawText(text, point.X, point.Y, textAlign, font, paint);
+            canvas.DrawText(text, point, textAlign, font, paint);
         }
 
         public void DrawTexture(SKBitmap source, SKPoint[] sourceVertices, SKPoint[] vertices)

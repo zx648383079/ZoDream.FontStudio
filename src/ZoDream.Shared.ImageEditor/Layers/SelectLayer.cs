@@ -14,17 +14,17 @@ namespace ZoDream.Shared.ImageEditor.Layers
             Style = SKPaintStyle.StrokeAndFill,
             ColorF = SKColors.Blue.WithAlpha(50)
         };
-        private Vector2 _start = Vector2.Zero;
-        private Vector2 _last = Vector2.Zero;
+        private SKPoint _start = SKPoint.Empty;
+        private SKPoint _last = SKPoint.Empty;
         private bool _isEnabled;
-        public Vector4 Bound => Vector4.Zero;
+        public SKRect Bound => SKRect.Empty;
 
-        public bool Contains(Vector2 point)
+        public bool Contains(SKPoint point)
         {
             return false;
         }
 
-        public SKBitmap? CreateThumbnail(Vector2 size)
+        public SKBitmap? CreateThumbnail(SKSize size)
         {
             return null;
         }
@@ -42,7 +42,7 @@ namespace ZoDream.Shared.ImageEditor.Layers
                 _paint);
         }
 
-        public void PointerMoved(Vector2 point)
+        public void PointerMoved(SKPoint point)
         {
             if (!_isEnabled)
             {
@@ -51,7 +51,7 @@ namespace ZoDream.Shared.ImageEditor.Layers
             _last = point;
         }
 
-        public void PointerPressed(Vector2 point)
+        public void PointerPressed(SKPoint point)
         {
             _isEnabled = true;
             _start = point;
@@ -63,7 +63,7 @@ namespace ZoDream.Shared.ImageEditor.Layers
             _isEnabled = false;
         }
 
-        public void Resize(Vector2 size)
+        public void Resize(SKSize size)
         {
         }
 

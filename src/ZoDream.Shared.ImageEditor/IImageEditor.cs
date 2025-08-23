@@ -1,15 +1,17 @@
 ﻿using SkiaSharp;
 using System;
-using System.Collections.Generic;
-using System.Numerics;
 
 namespace ZoDream.Shared.ImageEditor
 {
     public interface IImageEditor : IDisposable
     {
-        public Vector2 Size { get; }
+        public SKSize Size { get; }
 
-        public void Touch(Vector2 point);
+        public IImageLayer? Current { get; }
+
+        public void Add(IImageSource source);
+
+        public void Touch(SKPoint point);
 
         public void Select(IImageLayer? layer);
 
