@@ -16,6 +16,61 @@
         <vm:WorkspaceViewModel />
     </Page.DataContext>
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="GlyphGroupTemplate" x:DataType="vm:GlyphGroupViewModel">
+                <TreeViewItem AutomationProperties.Name="{Binding Name}" ItemsSource="{Binding Items}">
+                    <TextBlock Text="{Binding Name}" />
+                </TreeViewItem>
+            </DataTemplate>
+            <DataTemplate x:Key="GlyphItemTemplate" x:DataType="vm:GlyphViewModel">
+                <TreeViewItem AutomationProperties.Name="{Binding Name}">
+                    <TextBlock Text="{Binding Name}" />
+                </TreeViewItem>
+            </DataTemplate>
+
+
+
+            <DataTemplate x:Key="LayerItemTemplate">
+                <Grid Height="60">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding PreviewImage}" Stretch="UniformToFill" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Name}" />
+                    <ctl:ToggleIcon
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Command="{Binding Workspace.LayerVisibleToggleCommand}"
+                        CommandParameter="{Binding}"
+                        IsOn="{Binding IsVisible, Mode=TwoWay}"
+                        OffIcon="&#xED1A;"
+                        OnIcon="&#xE7B3;" />
+                    <ctl:ToggleIcon
+                        Grid.Column="3"
+                        VerticalAlignment="Center"
+                        Command="{Binding Workspace.LayerLockToggleCommand}"
+                        CommandParameter="{Binding}"
+                        IsOn="{Binding IsLocked, Mode=TwoWay}"
+                        OffIcon="&#xE785;"
+                        OnIcon="&#xE72E;" />
+                </Grid>
+            </DataTemplate>
+
+            <ctl:GlyphItemTemplateSelector
+                x:Key="GlyphTemplateSelector"
+                GlyphTemplate="{StaticResource GlyphItemTemplate}"
+                GroupTemplate="{StaticResource GlyphGroupTemplate}" />
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -82,9 +137,12 @@
                 <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
 
-            <TreeView ItemsSource="{Binding GlyphItems}" SelectedItem="{Binding SelectedLayer, Mode=TwoWay}" />
+            <TreeView
+                ItemTemplateSelector="{StaticResource GlyphTemplateSelector}"
+                ItemsSource="{Binding GlyphItems}"
+                SelectedItem="{Binding SelectedLayer, Mode=TwoWay}" />
 
-            <ctl:ImageEditor Grid.Column="1" />
+            <ctl:ImageEditor x:Name="Editor" Grid.Column="1" />
 
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
@@ -93,7 +151,10 @@
                 </Grid.RowDefinitions>
                 <ctl:ImageEditor />
 
-                <ListView Grid.Row="1" ItemsSource="{Binding LayerItems}" />
+                <ListView
+                    Grid.Row="1"
+                    ItemTemplate="{StaticResource LayerItemTemplate}"
+                    ItemsSource="{Binding LayerItems}" />
             </Grid>
         </Grid>
     </Grid>

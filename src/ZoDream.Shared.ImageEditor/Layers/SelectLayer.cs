@@ -42,23 +42,23 @@ namespace ZoDream.Shared.ImageEditor.Layers
                 _paint);
         }
 
-        public void PointerMoved(SKPoint point)
+        public void PointerMoved(IMouseRoutedArgs args)
         {
             if (!_isEnabled)
             {
                 return;
             }
-            _last = point;
+            _last = args.Position;
         }
 
-        public void PointerPressed(SKPoint point)
+        public void PointerPressed(IMouseRoutedArgs args)
         {
             _isEnabled = true;
-            _start = point;
-            _last = point;
+            _start = args.Position;
+            _last = args.Position;
         }
 
-        public void PointerReleased()
+        public void PointerReleased(IMouseRoutedArgs args)
         {
             _isEnabled = false;
         }

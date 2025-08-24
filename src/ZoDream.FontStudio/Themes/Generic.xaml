@@ -6,6 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/TitleBar.xaml" />
         <ResourceDictionary Source="ms-appx:///Themes/Editor.xaml" />
+        <ResourceDictionary Source="ms-appx:///Themes/Input.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 

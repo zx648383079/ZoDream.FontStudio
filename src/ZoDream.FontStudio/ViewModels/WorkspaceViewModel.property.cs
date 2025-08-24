@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using ZoDream.FontStudio.Controls;
-using ZoDream.FontStudio.ViewModels.Models;
 using ZoDream.Shared.ImageEditor;
 using ZoDream.Shared.UndoRedo;
 
@@ -12,7 +10,7 @@ namespace ZoDream.FontStudio.ViewModels
         private readonly AppViewModel _app = App.ViewModel;
 
         public CommandManager UndoRedo { get; private set; } = new();
-        public ImageEditor? Instance { get; set; }
+        public IImageEditor? Instance { get; set; }
 
 
         private bool _undoEnabled;
@@ -49,9 +47,9 @@ namespace ZoDream.FontStudio.ViewModels
 
         
 
-        private ImageLayerViewModel? _selectedLayer;
+        private IImageLayer? _selectedLayer;
 
-        public ImageLayerViewModel? SelectedLayer {
+        public IImageLayer? SelectedLayer {
             get => _selectedLayer;
             set {
                 SetProperty(ref _selectedLayer, value);

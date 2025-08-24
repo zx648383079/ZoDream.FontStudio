@@ -2,30 +2,15 @@
 
 namespace ZoDream.Shared.ImageEditor.Layers
 {
-    public class ResizeLayer : IImageSource, ICommandLayer, IMouseState
+    public class ResizeLayer(IImageEditor editor) : IImageSource, ICommandLayer, IMouseState
     {
 
-        private readonly int _jointSize = 24;
+
         private readonly SKPaint _paint = new()
         {
-            Color = SKColors.Blue,
-            StrokeWidth = 1,
-            Style = SKPaintStyle.StrokeAndFill,
-            ColorF = SKColors.Blue.WithAlpha(50)
-        };
-        private readonly SKPaint _jointPaint = new()
-        {
-            Color = SKColors.Blue,
-            StrokeWidth = 1,
-            Style = SKPaintStyle.StrokeAndFill,
-            ColorF = SKColors.White
-        };
-        private readonly SKPaint _hoveredPaint = new()
-        {
-            Color = SKColors.Blue,
-            StrokeWidth = 1,
-            Style = SKPaintStyle.StrokeAndFill,
-            ColorF = SKColors.Blue
+            IsStroke = true,
+            ColorF = SKColors.Blue.WithAlpha(50),
+            IsAntialias = true,
         };
         private SKSurface? _surface;
         public SKRect Bound { get; private set; } = SKRect.Empty;
@@ -63,12 +48,13 @@ namespace ZoDream.Shared.ImageEditor.Layers
 
         private void RenderSurface()
         {
+            var options = editor.Options;
             var bound = Bound;
             var info = new SKImageInfo((int)bound.Width, (int)bound.Height);
             _surface = SKSurface.Create(info);
             var canvas = _surface.Canvas;
             canvas.DrawRect(bound, _paint);
-            var jointHalf = (float)_jointSize / 2;
+            var jointHalf = options.JointSize / 2;
             var jointX = bound.Left - jointHalf;
             var jointY = bound.Top - jointHalf;
             var widthHalf = bound.Width / 2;
@@ -82,20 +68,20 @@ namespace ZoDream.Shared.ImageEditor.Layers
                         continue;
                     }
                     canvas.DrawRect(SKRect.Create(jointX + i * widthHalf, 
-                        jointY + j * heightHalf, _jointSize, _jointSize), _jointPaint);
+                        jointY + j * heightHalf, options.JointSize, options.JointSize), options.JointPaint);
                 }
             }
         }
 
-        public void PointerMoved(SKPoint point)
+        public void PointerMoved(IMouseRoutedArgs args)
         {
         }
 
-        public void PointerPressed(SKPoint point)
+        public void PointerPressed(IMouseRoutedArgs args)
         {
         }
 
-        public void PointerReleased()
+        public void PointerReleased(IMouseRoutedArgs args)
         {
         }
 

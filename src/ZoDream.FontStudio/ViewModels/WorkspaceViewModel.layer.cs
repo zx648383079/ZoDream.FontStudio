@@ -23,11 +23,15 @@ namespace ZoDream.FontStudio.ViewModels
         public void Add(IImageLayer layer)
         {
             LayerItems.Insert(0, layer);
+            SelectedLayer = layer;
         }
 
         public void Add(IImageSource source)
         {
-            Add(new ImageLayerViewModel(this, source));
+            Add(new ImageLayerViewModel(this, source)
+            {
+                Name = source.GetType().Name,
+            });
         }
 
         public void Clear()

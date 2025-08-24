@@ -35,7 +35,9 @@ namespace ZoDream.FontStudio.Pages
         {
             base.OnNavigatedTo(e);
             App.ViewModel.BindMenu(ViewModel);
-            //Editor.Commander = ViewModel;
+            ViewModel.Initialize(Editor);
+            Editor.Layer = ViewModel;
+            ViewModel.Instance = Editor;
             //if (e.Parameter is IEnumerable<IStorageItem> items)
             //{
             //    ViewModel.DragFileAsync(items);
@@ -45,7 +47,7 @@ namespace ZoDream.FontStudio.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            //ViewModel.Instance?.Dispose();
+            ViewModel.Dispose();
         }
     }
 }

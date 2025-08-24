@@ -14,6 +14,7 @@ namespace ZoDream.Shared.ImageEditor
         public void DrawText(string text, SKPoint point, SKTextAlign textAlign, SKFont font, SKPaint paint);
 
         public void DrawPath(SKPath path, SKPaint paint);
+        public void DrawLine(SKPoint from, SKPoint to, SKPaint paint);
         /// <summary>
         /// 绘制纹理
         /// </summary>

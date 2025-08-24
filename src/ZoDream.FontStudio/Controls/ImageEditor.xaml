@@ -17,12 +17,15 @@
         ZoomMode="Enabled">
         <skia:SKXamlCanvas
             x:Name="PART_Canvas"
+            KeyDown="PART_Canvas_KeyDown"
+            KeyUp="PART_Canvas_KeyUp"
             ManipulationCompleted="PART_Canvas_ManipulationCompleted"
             ManipulationDelta="PART_Canvas_ManipulationDelta"
             ManipulationStarted="PART_Canvas_ManipulationStarted"
             PaintSurface="PART_Canvas_PaintSurface"
             PointerMoved="PART_Canvas_PointerMoved"
             PointerPressed="PART_Canvas_PointerPressed"
-            PointerReleased="PART_Canvas_PointerReleased" />
+            PointerReleased="PART_Canvas_PointerReleased"
+            XYFocusKeyboardNavigation="Enabled" />
     </ScrollViewer>
 </UserControl>

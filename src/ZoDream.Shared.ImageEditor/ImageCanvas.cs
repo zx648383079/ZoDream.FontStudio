@@ -34,6 +34,11 @@ namespace ZoDream.Shared.ImageEditor
             canvas.DrawPath(path, paint);
         }
 
+        public void DrawLine(SKPoint from, SKPoint to, SKPaint paint)
+        {
+            canvas.DrawLine(from, to, paint);
+        }
+
         public void DrawRect(SKRect rect, SKPaint paint)
         {
             canvas.DrawRect(rect, paint);

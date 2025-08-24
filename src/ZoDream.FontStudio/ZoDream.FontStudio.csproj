@@ -23,6 +23,7 @@
     <None Remove="Themes\DarkTheme.xaml" />
     <None Remove="Themes\Editor.xaml" />
     <None Remove="Themes\Generic.xaml" />
+    <None Remove="Themes\Input.xaml" />
     <None Remove="Themes\LightTheme.xaml" />
     <None Remove="Themes\TitleBar.xaml" />
   </ItemGroup>
@@ -110,6 +111,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Dialogs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Themes\Input.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--

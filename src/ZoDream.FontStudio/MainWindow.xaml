@@ -90,55 +90,27 @@
                     </MenuFlyoutItem>
                     <MenuFlyoutSeparator />
                     <MenuFlyoutItem Command="{Binding PropertyCommand}" Text="属性" />
-                    <RadioMenuFlyoutItem
-                        Command="{Binding TransparentCommand}"
-                        IsChecked="True"
-                        Text="透明背景" />
-                    <MenuFlyoutSeparator />
-                    <MenuFlyoutItem Command="{Binding SeparateCommand}" Text="自动拆分" />
-                    <MenuFlyoutSubItem Text="排列">
+                    <MenuFlyoutSubItem Text="模式">
                         <MenuFlyoutItem
-                            Command="{Binding OrderCommand}"
-                            CommandParameter="TopDown"
-                            Text="上下布局" />
+                            Command="{Binding ModeCommand}"
+                            CommandParameter="View"
+                            Text="浏览模式" />
                         <MenuFlyoutItem
-                            Command="{Binding OrderCommand}"
-                            CommandParameter="LeftRight"
-                            Text="左右布局" />
+                            Command="{Binding ModeCommand}"
+                            CommandParameter="Move"
+                            Text="移动模式" />
                         <MenuFlyoutItem
-                            Command="{Binding OrderCommand}"
-                            CommandParameter="Diagonal"
-                            Text="对角布局" />
+                            Command="{Binding ModeCommand}"
+                            CommandParameter="Pen"
+                            Text="钢笔模式" />
                         <MenuFlyoutItem
-                            Command="{Binding OrderCommand}"
-                            CommandParameter="AltDiagonal"
-                            Text="斜对角布局" />
-                        <MenuFlyoutItem
-                            Command="{Binding OrderCommand}"
-                            CommandParameter="BinaryTree"
-                            Text="二叉树布局" />
+                            Command="{Binding ModeCommand}"
+                            CommandParameter="PenJoint"
+                            Text="节点模式" />
                     </MenuFlyoutSubItem>
                 </MenuBarItem>
                 <MenuBarItem Title="图层">
-                    <MenuFlyoutSubItem Text="新建图层">
-                        <MenuFlyoutItem
-                            Command="{Binding AddLayerCommand}"
-                            CommandParameter="text"
-                            Text="文字" />
-                        <MenuFlyoutItem
-                            Command="{Binding AddLayerCommand}"
-                            CommandParameter="rect"
-                            Text="矩形" />
-                        <MenuFlyoutItem
-                            Command="{Binding AddLayerCommand}"
-                            CommandParameter="circle"
-                            Text="椭圆" />
-                        <MenuFlyoutItem
-                            Command="{Binding AddLayerCommand}"
-                            CommandParameter="path"
-                            Text="路径" />
-                    </MenuFlyoutSubItem>
-                    <MenuFlyoutItem Command="{Binding AddGroupCommand}" Text="新建组" />
+                    <MenuFlyoutSubItem Text="新建图层" />
                     <MenuFlyoutItem
                         Command="{Binding LayerRenameCommand}"
                         IsEnabled="{Binding IsSelectedLayer}"
@@ -188,10 +160,6 @@
                         Command="{Binding SelectNextCommand}"
                         IsEnabled="{Binding IsSelectedLayer}"
                         Text="选择下一层" />
-                    <MenuFlyoutItem
-                        Command="{Binding SelectParentCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="选择父层" />
                     <MenuFlyoutItem Command="{Binding SelectTopCommand}" Text="选择顶层" />
                     <MenuFlyoutItem Command="{Binding SelectBottomCommand}" Text="选择底层" />
                     <MenuFlyoutSeparator />
@@ -199,72 +167,6 @@
                         Command="{Binding LayerPropertyCommand}"
                         IsEnabled="{Binding IsSelectedLayer}"
                         Text="图层属性" />
-                </MenuBarItem>
-                <MenuBarItem Title="排列">
-                    <MenuFlyoutItem
-                        Command="{Binding LayerMoveTopCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="移至顶层" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerMoveUpCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="上移一层" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerMoveDownCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="下移一层" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerMoveBottomCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="移至底层" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerMoveParentCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="移出父层" />
-                    <MenuFlyoutSeparator />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerHorizontalLeftCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="左对齐" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerHorizontalCenterCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="居中对齐" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerHorizontalRightCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="右对齐" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerVerticalTopCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="顶部对齐" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerVerticalMidCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="中间对齐" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerVerticalBottomCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="底部对齐" />
-                    <MenuFlyoutSeparator />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerHorizontalFlipCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="水平翻转" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerVerticalFlipCommand}"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="垂直翻转" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerRotateCommand}"
-                        CommandParameter="90"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="顺时针旋转90°" />
-                    <MenuFlyoutItem
-                        Command="{Binding LayerRotateCommand}"
-                        CommandParameter="-90"
-                        IsEnabled="{Binding IsSelectedLayer}"
-                        Text="逆时针旋转90°" />
                 </MenuBarItem>
                 <MenuBarItem Title="帮助">
                     <MenuFlyoutItem Command="{Binding AboutCommand}" Text="关于">

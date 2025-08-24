@@ -1,31 +1,80 @@
 ﻿using SkiaSharp;
+using ZoDream.Shared.ImageEditor.Sources;
 
 namespace ZoDream.Shared.ImageEditor.Controllers
 {
-    public class PenController(IImageEditor editor) : ICommandController
+    public class PenController(IImageEditor editor) : ICommandController, IMouseState
     {
-
-
-        public void PointerMoved(SKPoint point)
+        public const int JointSize = 24;
+        public bool IsEnabled => true;
+        private bool _isRightButtonPressed = false;
+        private SKPoint _last = SKPoint.Empty;
+        private readonly SKPaint _paint = new()
         {
+            Color = SKColors.Blue.WithAlpha(150),
+            StrokeWidth = 1,
+            IsStroke = true
+        };
+        private PathImageSource? _layer;
+
+
+        public void Initialize(IImageLayer? layer)
+        {
+            if (layer?.Source is PathImageSource p)
+            {
+                _layer = p;
+                return;
+            }
+            _layer = null;
         }
 
-        public void PointerPressed(SKPoint point)
+        public void PointerMoved(IMouseRoutedArgs args)
         {
+            _last = args.Position;
+            if (_layer is null || _layer.IsEmpty)
+            {
+                return;
+            }
+            editor.Invalidate();
         }
 
-        public void PointerReleased()
+        public void PointerPressed(IMouseRoutedArgs args)
         {
+            _isRightButtonPressed = args.IsRightButtonPressed;
+            _last = args.Position;
+        }
+
+        public void PointerReleased(IMouseRoutedArgs args)
+        {
+            if (_isRightButtonPressed)
+            {
+                _layer = null;
+                editor.Invalidate();
+                return;
+            }
+            if (_layer is null)
+            {
+                editor.Add(_layer = new PathImageSource());
+            }
+            _layer.Add(_last);
+            editor.Invalidate();
         }
 
        
 
         public void Paint(IImageCanvas canvas)
         {
+            if (_layer is null || _layer.IsEmpty)
+            {
+                return;
+            }
+            canvas.DrawLine(_layer.Last, _last, _paint);
         }
 
         public void Dispose()
         {
+            _paint?.Dispose();
         }
+
     }
 }
