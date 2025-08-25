@@ -70,10 +70,10 @@ namespace ZoDream.Shared.Font
             switch (Contour.Segments[0])
             {
                 case QuadraticBezierSegment q:
-                    q.Point1 = arg;
+                    q.ControlPoint = arg;
                     break;
                 case CubicBezierSegment c:
-                    c.Point1 = arg;
+                    c.ControlPoint1 = arg;
                     break;
                 default:
                     break;

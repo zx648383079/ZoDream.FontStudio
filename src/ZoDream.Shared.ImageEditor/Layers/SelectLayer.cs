@@ -17,6 +17,8 @@ namespace ZoDream.Shared.ImageEditor.Layers
         private SKPoint _start = SKPoint.Empty;
         private SKPoint _last = SKPoint.Empty;
         private bool _isEnabled;
+
+        public bool IsVisible { get; set; } = true;
         public SKRect Bound => SKRect.Empty;
 
         public bool Contains(SKPoint point)

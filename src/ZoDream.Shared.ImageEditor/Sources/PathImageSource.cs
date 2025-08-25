@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 using System;
-using ZoDream.Shared.ImageEditor.Layers;
 
 namespace ZoDream.Shared.ImageEditor.Sources
 {
@@ -10,6 +9,7 @@ namespace ZoDream.Shared.ImageEditor.Sources
         private readonly SKPaint _paint = new()
         {
             Color = SKColors.Black,
+            ColorF = SKColors.Black,
             StrokeWidth = 2,
             IsStroke = true,
             IsAntialias = true,
@@ -37,10 +37,15 @@ namespace ZoDream.Shared.ImageEditor.Sources
             if (IsEmpty)
             {
                 _path.MoveTo(point);
-            } else
-            {
-                _path.LineTo(point);
+                return;
             }
+            _path.LineTo(point);
+        }
+
+        public void ClosePath()
+        {
+            _path.Close();
+            _paint.IsStroke = false;
         }
 
         public int NearOf(SKPoint point, float maxOffset)

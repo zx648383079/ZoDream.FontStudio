@@ -5,6 +5,8 @@ namespace ZoDream.Shared.ImageEditor
 {
     public interface ICommandLayer : IDisposable
     {
+        public bool IsVisible { get; set; }
+
         public void Resize(SKSize size);
         /// <summary>
         /// 设置面向的图层

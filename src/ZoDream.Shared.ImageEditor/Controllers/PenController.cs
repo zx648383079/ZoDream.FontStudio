@@ -1,11 +1,11 @@
 ﻿using SkiaSharp;
+using System;
 using ZoDream.Shared.ImageEditor.Sources;
 
 namespace ZoDream.Shared.ImageEditor.Controllers
 {
     public class PenController(IImageEditor editor) : ICommandController, IMouseState
     {
-        public const int JointSize = 24;
         public bool IsEnabled => true;
         private bool _isRightButtonPressed = false;
         private SKPoint _last = SKPoint.Empty;
@@ -56,11 +56,28 @@ namespace ZoDream.Shared.ImageEditor.Controllers
             {
                 editor.Add(_layer = new PathImageSource());
             }
-            _layer.Add(_last);
+            if (IsClosePath(_last))
+            {
+                _layer.ClosePath();
+                _layer = null;
+            } else
+            {
+                _layer.Add(_last);
+            }
             editor.Invalidate();
         }
 
-       
+        private bool IsClosePath(SKPoint point)
+        {
+            if (_layer!.Points.Length <= 2)
+            {
+                return false;
+            }
+            var offset = point - _layer.Points[0];
+            var maxOffset = editor.Options.JointSize / 2;
+            return Math.Abs(offset.X) < maxOffset && Math.Abs(offset.Y) < maxOffset;
+        }
+
 
         public void Paint(IImageCanvas canvas)
         {

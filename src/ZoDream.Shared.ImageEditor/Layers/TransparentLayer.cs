@@ -15,6 +15,8 @@ namespace ZoDream.Shared.ImageEditor.Layers
 
         private SKSurface? _surface;
 
+        public bool IsVisible { get; set; } = true;
+
         public SKRect Bound => SKRect.Empty;
 
         public void Resize(SKSize size)

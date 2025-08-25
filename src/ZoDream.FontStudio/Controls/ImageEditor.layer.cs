@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using System;
+using System.Collections.Generic;
 using ZoDream.Shared.ImageEditor;
 using ZoDream.Shared.ImageEditor.Layers;
 
@@ -7,7 +8,8 @@ namespace ZoDream.FontStudio.Controls
 {
     public partial class ImageEditor : IImageEditor
     {
-        private TransparentLayer? _backgroundLayer;
+        private readonly IList<ICommandLayer> _bottomLayers = [];
+        private readonly IList<ICommandLayer> _topLayers = [];
         public ILayerController? Layer { get; set; }
         public ICommandController? Command { get; set; }
 
@@ -17,11 +19,24 @@ namespace ZoDream.FontStudio.Controls
 
         public IImageLayer? Current => Layer?.Current;
 
+        public void Initialize()
+        {
+            _bottomLayers.Add(new TransparentLayer(this));
+            _bottomLayers.Add(new GlyphLayoutLayer(this));
+        }
+
         public void Resize(SKSize size)
         {
             Size = size;
             ResizeWithControl(size);
-            _backgroundLayer?.Invalidate();
+            foreach (var layer in _bottomLayers)
+            {
+                layer.Invalidate();
+            }
+            foreach (var layer in _topLayers)
+            {
+                layer.Invalidate();
+            }
         }
 
         public void SwitchMode<T>() where T : ICommandController
@@ -45,10 +60,24 @@ namespace ZoDream.FontStudio.Controls
         {
             canvas.Clear(SKColors.Transparent);
             var c = new ImageCanvas(canvas);
-            _backgroundLayer ??= new TransparentLayer(this);
-            _backgroundLayer.Paint(c);
+            foreach (var layer in _bottomLayers)
+            {
+                if (!layer.IsVisible)
+                {
+                    continue;
+                }
+                layer.Paint(c);
+            }
             Layer?.Paint(c);
             Command?.Paint(c);
+            foreach (var layer in _topLayers)
+            {
+                if (!layer.IsVisible)
+                {
+                    continue;
+                }
+                layer.Paint(c);
+            }
         }
 
         public void Select(IImageLayer? layer)
@@ -115,8 +144,15 @@ namespace ZoDream.FontStudio.Controls
 
         public void Dispose()
         {
-            _backgroundLayer?.Dispose();
             Command?.Dispose();
+            foreach (var layer in _bottomLayers)
+            {
+                layer.Dispose();
+            }
+            foreach (var layer in _topLayers)
+            {
+                layer.Dispose();
+            }
             Options?.Dispose();
         }
     }

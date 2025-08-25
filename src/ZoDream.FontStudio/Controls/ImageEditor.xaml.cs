@@ -26,6 +26,7 @@ namespace ZoDream.FontStudio.Controls
         private void ImageEditor_Loaded(object sender, RoutedEventArgs e)
         {
             _booted = true;
+            Initialize();
             Resize(new SKSize((float)(ActualWidth * _dpiScale), (float)(ActualHeight * _dpiScale)));
         }
 

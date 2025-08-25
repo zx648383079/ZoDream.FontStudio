@@ -13,6 +13,8 @@ namespace ZoDream.Shared.ImageEditor.Layers
             IsAntialias = true,
         };
         private SKSurface? _surface;
+
+        public bool IsVisible { get; set; } = false;
         public SKRect Bound { get; private set; } = SKRect.Empty;
 
         public bool Contains(SKPoint point)

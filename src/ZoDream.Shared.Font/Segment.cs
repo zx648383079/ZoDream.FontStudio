@@ -26,14 +26,14 @@ namespace ZoDream.Shared.Font
         }
     }
 
-    public class QuadraticBezierSegment(SKPoint point1, SKPoint point2) : IGlyphSegment
+    public class QuadraticBezierSegment(SKPoint controlPoint, SKPoint toPoint) : IGlyphSegment
     {
-        public SKPoint Point1 { get; set; } = point1;
-        public SKPoint Point2 { get; set; } = point2;
+        public SKPoint ControlPoint { get; set; } = controlPoint;
+        public SKPoint ToPoint { get; set; } = toPoint;
 
         public object Clone()
         {
-            return new QuadraticBezierSegment(Point1, Point2);
+            return new QuadraticBezierSegment(ControlPoint, ToPoint);
         }
 
         public static explicit operator QuadraticBezierSegment(Vector4 rect)
@@ -43,15 +43,15 @@ namespace ZoDream.Shared.Font
                 new SKPoint(rect.Z, rect.W));
         }
     }
-    public class CubicBezierSegment(SKPoint point1, SKPoint point2, SKPoint point3) : IGlyphSegment
+    public class CubicBezierSegment(SKPoint controlPoint1, SKPoint controlPoint2, SKPoint toPoint) : IGlyphSegment
     {
-        public SKPoint Point1 { get; set; } = point1;
-        public SKPoint Point2 { get; set; } = point2;
-        public SKPoint Point3 { get; set; } = point3;
+        public SKPoint ControlPoint1 { get; set; } = controlPoint1;
+        public SKPoint ControlPoint2 { get; set; } = controlPoint2;
+        public SKPoint ToPoint { get; set; } = toPoint;
 
         public object Clone()
         {
-            return new CubicBezierSegment(Point1, Point2, Point3);
+            return new CubicBezierSegment(ControlPoint1, ControlPoint2, ToPoint);
         }
 
     }
