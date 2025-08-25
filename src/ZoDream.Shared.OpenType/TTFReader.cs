@@ -34,10 +34,11 @@ namespace ZoDream.Shared.OpenType
             {
                 entries[i] = ReadTableEntry();
             }
+            var data = entries.ToCollection();
+            var serializer = new TypefaceTableSerializer(reader.BaseStream, new TypefaceSerializer(OTFReader.Converters), data);
             foreach (var item in entries)
             {
-                reader.Position = item.Offset;
-                // 解 table
+                serializer.TryGet(item, out _);
             }
             return res;
         }

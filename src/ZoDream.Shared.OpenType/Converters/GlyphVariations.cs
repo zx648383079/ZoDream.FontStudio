@@ -15,12 +15,6 @@ namespace ZoDream.Shared.OpenType.Converters
 
             ushort majorVersion = reader.ReadUInt16();
             ushort minorVersion = reader.ReadUInt16();
-#if DEBUG
-            if (majorVersion != 1 && minorVersion != 0)
-            {
-                //WARN
-            }
-#endif
 
             res.AxisCount = reader.ReadUInt16(); //This must be the same number as axisCount in the 'fvar' table
 

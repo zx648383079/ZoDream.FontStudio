@@ -38,10 +38,10 @@ namespace ZoDream.FontStudio.Pages
             ViewModel.Initialize(Editor);
             Editor.Layer = ViewModel;
             ViewModel.Instance = Editor;
-            //if (e.Parameter is IEnumerable<IStorageItem> items)
-            //{
-            //    ViewModel.DragFileAsync(items);
-            //}
+            if (e.Parameter is IEnumerable<IStorageItem> items)
+            {
+                ViewModel.DragFileAsync(items);
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

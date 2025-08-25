@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using ZoDream.Shared.Font;
 using ZoDream.Shared.IO;
 using ZoDream.Shared.OpenType.Tables;

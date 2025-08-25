@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.UndoRedo", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Shared.ImageEditor", "ZoDream.Shared.ImageEditor\ZoDream.Shared.ImageEditor.csproj", "{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoDream.Tests", "ZoDream.Tests\ZoDream.Tests.csproj", "{72995123-5080-4EAF-9597-763688CD4021}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -117,6 +119,18 @@ Global
 		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|x64.Build.0 = Release|Any CPU
 		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|x86.ActiveCfg = Release|Any CPU
 		{6EC822B1-6F0C-4568-B031-1B7D2135F2D5}.Release|x86.Build.0 = Release|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Debug|x64.Build.0 = Debug|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Debug|x86.Build.0 = Debug|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Release|ARM64.Build.0 = Release|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Release|x64.ActiveCfg = Release|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Release|x64.Build.0 = Release|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Release|x86.ActiveCfg = Release|Any CPU
+		{72995123-5080-4EAF-9597-763688CD4021}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

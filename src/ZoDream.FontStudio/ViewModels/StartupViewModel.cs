@@ -30,10 +30,11 @@ namespace ZoDream.FontStudio.ViewModels
         private async void TapOpen()
         {
             var picker = new FileOpenPicker();
-            picker.FileTypeFilter.Add("*.ttf");
-            picker.FileTypeFilter.Add("*.otf");
-            picker.FileTypeFilter.Add("*.woff");
-            picker.FileTypeFilter.Add("*.woff2");
+            picker.FileTypeFilter.Add(".ttf");
+            picker.FileTypeFilter.Add(".otf");
+            picker.FileTypeFilter.Add(".ttc");
+            picker.FileTypeFilter.Add(".woff");
+            picker.FileTypeFilter.Add(".woff2");
             App.ViewModel.InitializePicker(picker);
             var items = await picker.PickMultipleFilesAsync();
             if (items.Count == 0)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using ZoDream.Shared.IO;
 
 namespace ZoDream.Shared.Font
@@ -17,6 +18,49 @@ namespace ZoDream.Shared.Font
             : base(items)
         {
 
+        }
+
+        private readonly Dictionary<string, Type> _nameToType = [];
+
+        private void Initialize()
+        {
+            var tableType = typeof(ITypefaceTable);
+            foreach (var item in this)
+            {
+                foreach (var interfaceType in item.GetType().GetInterfaces())
+                {
+                    if (!interfaceType.IsGenericType || interfaceType.GenericTypeArguments.Length != 1)
+                    {
+                        continue;
+                    }
+                    var targetType = interfaceType.GenericTypeArguments[0];
+                    if (!targetType.IsAssignableTo(tableType))
+                    {
+                        continue;
+                    }
+                    var property = targetType.GetProperty("TableName", BindingFlags.Static | BindingFlags.Public);
+                    var name = property?.GetValue(null)?.ToString();
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        continue;
+                    }
+                    _nameToType.Add(name, targetType);
+                }
+            }
+        }
+
+        public bool TryGet(string tableName, [NotNullWhen(true)] out Type? result)
+        {
+            if (Count == 0)
+            {
+                result = null;
+                return false;
+            }
+            if (_nameToType.Count == 0)
+            {
+                Initialize();
+            }
+            return _nameToType.TryGetValue(tableName, out result);
         }
 
         public bool TryGet<T>([NotNullWhen(true)] out ITypefaceConverter? converter)

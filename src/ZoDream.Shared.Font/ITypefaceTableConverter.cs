@@ -15,5 +15,6 @@ namespace ZoDream.Shared.Font
     public interface ITypefaceTableSerializer
     {
         public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : ITypefaceTable;
+        public bool TryGet(ITypefaceTableEntry entry, [NotNullWhen(true)] out ITypefaceTable? result);
     }
 }

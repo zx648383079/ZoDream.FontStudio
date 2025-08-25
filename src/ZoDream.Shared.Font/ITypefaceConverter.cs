@@ -7,6 +7,9 @@ namespace ZoDream.Shared.Font
 {
     public interface ITypefaceConverterCollection : ICollection<ITypefaceConverter>
     {
+
+        public bool TryGet(string tableName, [NotNullWhen(true)] out Type? result);
+
         public bool TryGet<T>([NotNullWhen(true)] out ITypefaceConverter? converter);
         public bool TryGet(Type objectType, [NotNullWhen(true)] out ITypefaceConverter? converter);
     }
