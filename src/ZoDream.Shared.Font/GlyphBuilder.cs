@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using SkiaSharp;
+using System.Linq;
 using System.Numerics;
 
 namespace ZoDream.Shared.Font
@@ -9,12 +10,12 @@ namespace ZoDream.Shared.Font
 
         public Glyph Glyph { get; set; } = new();
 
-        public Vector2 Offset { get; set; } = Vector2.Zero;
+        public SKPoint Offset { get; set; } = SKPoint.Empty;
 
-        public Vector4 Scale { get; set; } = new(1, 0, 0, 1);
+        public SKRotationScaleMatrix Scale { get; set; } = new(1, 0, 0, 1);
 
 
-        public Vector4 BoundingBox 
+        public SKRect BoundingBox 
         {
             get => Glyph.BoundingBox; 
             set => Glyph.BoundingBox = value;
@@ -39,27 +40,27 @@ namespace ZoDream.Shared.Font
             Contour = new();
         }
 
-        public Vector2 Transform(Vector2 value)
+        public SKPoint Transform(SKPoint value)
         {
-            return new Vector2(Scale.X * value.X + Scale.Y * value.Y,
-                Scale.Z * value.X + Scale.W * value.Y);
+            return new SKPoint(Scale.SCos * value.X + Scale.SSin * value.Y,
+                Scale.TX * value.X + Scale.TY * value.Y);
         }
 
-        public void MoveAbsolute(Vector2 offset)
+        public void MoveAbsolute(SKPoint offset)
         {
-            var last = Glyph.Contours.Count > 0 ? Glyph.Contours.Last().Position : Vector2.Zero;
+            var last = Glyph.Contours.Count > 0 ? Glyph.Contours.Last().Position : SKPoint.Empty;
             var arg = Offset + Transform(offset);
             Contour.Offset = arg - last;
             Contour.Position = arg;
         }
 
-        public void MoveRelative(Vector2 offset)
+        public void MoveRelative(SKPoint offset)
         {
             var arg = Transform(offset);
             Contour.Offset += arg;
             Contour.Position += arg;
         }
-        public void MoveControl(Vector2 offset)
+        public void MoveControl(SKPoint offset)
         {
             var arg = Transform(offset);
             if (Contour.Segments.Count == 0)
@@ -79,19 +80,19 @@ namespace ZoDream.Shared.Font
             }
         }
 
-        public void AddLinear(Vector2 point)
+        public void AddLinear(SKPoint point)
         {
             Contour.Segments.Add(new LinearSegment(Transform(point)));
         }
 
-        public void AddQuadratic(Vector2 point1, Vector2 point2)
+        public void AddQuadratic(SKPoint point1, SKPoint point2)
         {
             Contour.Segments.Add(new QuadraticBezierSegment(
                 Transform(point1), 
                 Transform(point2)));
         }
 
-        public void AddCubic(Vector2 point1, Vector2 point2, Vector2 point3)
+        public void AddCubic(SKPoint point1, SKPoint point2, SKPoint point3)
         {
             Contour.Segments.Add(new CubicBezierSegment(
                 Transform(point1), 
@@ -102,7 +103,7 @@ namespace ZoDream.Shared.Font
         public static explicit operator Glyph(GlyphBuilder builder)
         {
             var glyph = (Glyph)builder.Glyph.Clone();
-            glyph.SideBearings = new Vector2(glyph.SideBearings.X,
+            glyph.SideBearings = new SKPoint(glyph.SideBearings.X,
                 glyph.AdvanceWidth - (glyph.SideBearings.X + glyph.Width));
             return glyph;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 using System.IO;
 using ZoDream.Shared.Font;
 using ZoDream.Shared.IO;
@@ -22,7 +23,11 @@ namespace ZoDream.Shared.OpenType.Converters
 
             reader.BaseStream.Seek(beginAt + offsetFirstColorRecord, SeekOrigin.Begin);
             res.Colors = reader.ReadArray(colorCount, () => {
-                return Color.FromBGRA(reader.ReadByte(), reader.ReadByte(), reader.ReadByte(), reader.ReadByte());
+                var b = reader.ReadByte();
+                var g = reader.ReadByte();
+                var r = reader.ReadByte();
+                var a = reader.ReadByte();
+                return  new SKColor(r, g, b, a);
             });
             return res;
         }

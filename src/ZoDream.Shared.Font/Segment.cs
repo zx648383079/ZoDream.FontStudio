@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 using System.Numerics;
 
 namespace ZoDream.Shared.Font
@@ -8,13 +9,13 @@ namespace ZoDream.Shared.Font
 
     }
 
-    public class LinearSegment(Vector2 point) : IGlyphSegment
+    public class LinearSegment(SKPoint point) : IGlyphSegment
     {
-        public Vector2 Point { get; set; } = point;
+        public SKPoint Point { get; set; } = point;
 
         
 
-        public static explicit operator LinearSegment(Vector2 point)
+        public static explicit operator LinearSegment(SKPoint point)
         {
             return new LinearSegment(point);
         }
@@ -25,10 +26,10 @@ namespace ZoDream.Shared.Font
         }
     }
 
-    public class QuadraticBezierSegment(Vector2 point1, Vector2 point2) : IGlyphSegment
+    public class QuadraticBezierSegment(SKPoint point1, SKPoint point2) : IGlyphSegment
     {
-        public Vector2 Point1 { get; set; } = point1;
-        public Vector2 Point2 { get; set; } = point2;
+        public SKPoint Point1 { get; set; } = point1;
+        public SKPoint Point2 { get; set; } = point2;
 
         public object Clone()
         {
@@ -38,15 +39,15 @@ namespace ZoDream.Shared.Font
         public static explicit operator QuadraticBezierSegment(Vector4 rect)
         {
             return new QuadraticBezierSegment(
-                new Vector2(rect.X, rect.Y), 
-                new Vector2(rect.Z, rect.W));
+                new SKPoint(rect.X, rect.Y), 
+                new SKPoint(rect.Z, rect.W));
         }
     }
-    public class CubicBezierSegment(Vector2 point1, Vector2 point2, Vector2 point3) : IGlyphSegment
+    public class CubicBezierSegment(SKPoint point1, SKPoint point2, SKPoint point3) : IGlyphSegment
     {
-        public Vector2 Point1 { get; set; } = point1;
-        public Vector2 Point2 { get; set; } = point2;
-        public Vector2 Point3 { get; set; } = point3;
+        public SKPoint Point1 { get; set; } = point1;
+        public SKPoint Point2 { get; set; } = point2;
+        public SKPoint Point3 { get; set; } = point3;
 
         public object Clone()
         {
