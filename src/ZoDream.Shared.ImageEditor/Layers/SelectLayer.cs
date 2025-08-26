@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 using System;
-using System.Numerics;
 
 namespace ZoDream.Shared.ImageEditor.Layers
 {
@@ -16,10 +15,12 @@ namespace ZoDream.Shared.ImageEditor.Layers
         };
         private SKPoint _start = SKPoint.Empty;
         private SKPoint _last = SKPoint.Empty;
-        private bool _isEnabled;
 
-        public bool IsVisible { get; set; } = true;
-        public SKRect Bound => SKRect.Empty;
+        public bool IsVisible { get; set; } = false;
+        public SKRect Bound => new(
+                Math.Min(_start.X, _last.X), Math.Min(_start.Y, _last.Y),
+                Math.Max(_start.X, _last.X), Math.Max(_start.Y, _last.Y)
+                );
 
         public bool Contains(SKPoint point)
         {
@@ -37,16 +38,17 @@ namespace ZoDream.Shared.ImageEditor.Layers
 
         public void Paint(IImageCanvas canvas)
         {
-            canvas.DrawRect(new SKRect(
-                Math.Min(_start.X, _last.X), Math.Min(_start.Y, _last.Y),
-                Math.Max(_start.X, _last.X), Math.Max(_start.Y, _last.Y)
-                ), 
+            if (!IsVisible)
+            {
+                return;
+            }
+            canvas.DrawRect(Bound, 
                 _paint);
         }
 
         public void PointerMoved(IMouseRoutedArgs args)
         {
-            if (!_isEnabled)
+            if (!IsVisible)
             {
                 return;
             }
@@ -55,14 +57,14 @@ namespace ZoDream.Shared.ImageEditor.Layers
 
         public void PointerPressed(IMouseRoutedArgs args)
         {
-            _isEnabled = true;
+            IsVisible = true;
             _start = args.Position;
             _last = args.Position;
         }
 
         public void PointerReleased(IMouseRoutedArgs args)
         {
-            _isEnabled = false;
+            IsVisible = false;
         }
 
         public void Resize(SKSize size)

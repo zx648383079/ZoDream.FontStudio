@@ -30,7 +30,22 @@ namespace ZoDream.Shared.ImageEditor.Controllers
 
         public void PointerMoved(IMouseRoutedArgs args)
         {
-            _last = args.Position;
+            if (!args.IsShiftPressed || _layer?.IsEmpty != false)
+            {
+                _last = args.Position;
+            } else
+            {
+                var offset = args.Position - _layer.Last;
+                if (Math.Abs(offset.X) >= Math.Abs(offset.Y))
+                {
+                    _last = new SKPoint(args.Position.X, _layer.Last.Y);
+                }
+                else
+                {
+                    _last = new SKPoint(_layer.Last.X, args.Position.Y);
+                }
+            }
+
             if (_layer is null || _layer.IsEmpty)
             {
                 return;

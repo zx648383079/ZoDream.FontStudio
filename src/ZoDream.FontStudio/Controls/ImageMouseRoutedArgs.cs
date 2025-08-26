@@ -7,9 +7,13 @@ using ZoDream.Shared.ImageEditor;
 
 namespace ZoDream.FontStudio.Controls
 {
-    public class ImageMouseRoutedArgs(SKPoint point, PointerPoint? source = null, VirtualKeyModifiers? modifiers = null) : IMouseRoutedArgs
+    public class ImageMouseRoutedArgs(SKPoint point, 
+        PointerState state,
+        PointerPoint? source = null, VirtualKeyModifiers? modifiers = null) : IMouseRoutedArgs
     {
         public SKPoint Position => point;
+
+        public PointerState State => state;
 
         public bool IsLeftButtonPressed => source?.Properties?.IsLeftButtonPressed == true;
 

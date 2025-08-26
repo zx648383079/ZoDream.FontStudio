@@ -88,46 +88,73 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <CommandBar>
-                <AppBarButton
+            <StackPanel Orientation="Horizontal">
+                <Button
                     Command="{Binding UndoCommand}"
-                    Icon="Undo"
+                    Content="&#xE7A7;"
                     IsEnabled="{Binding UndoEnabled}"
-                    Label="撤销" />
-                <AppBarButton
+                    Style="{StaticResource LargeIconBtn}"
+                    ToolTipService.ToolTip="撤销" />
+                <Button
                     Command="{Binding RedoCommand}"
-                    Icon="Redo"
+                    Content="&#xE7A6;"
                     IsEnabled="{Binding RedoEnabled}"
-                    Label="重做" />
+                    Style="{StaticResource LargeIconBtn}"
+                    ToolTipService.ToolTip="重做" />
                 <AppBarSeparator />
-                <AppBarButton
-                    Command="{Binding SaveCommand}"
-                    Icon="Save"
-                    Label="保存" />
-                <AppBarButton
-                    Command="{Binding AddLayerCommand}"
-                    Icon="OpenFile"
-                    Label="添加图层" />
-                <AppBarButton
-                    Command="{Binding DeleteLayerCommand}"
-                    Icon="Delete"
-                    IsEnabled="{Binding IsSelectedLayer}"
-                    Label="删除图层" />
-                <AppBarButton
-                    Command="{Binding ImportFolderCommand}"
-                    Icon="OpenLocal"
-                    Label="导入文件夹" />
-                <AppBarSeparator />
-                <AppBarButton
-                    Command="{Binding LayerPropertyCommand}"
-                    Icon="Setting"
-                    IsEnabled="{Binding IsSelectedLayer}"
-                    Label="图层属性" />
-                <AppBarButton
-                    Command="{Binding ExportCommand}"
-                    Icon="Download"
-                    Label="导出" />
-            </CommandBar>
+                <DropDownButton
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ToolTipService.ToolTip="模式切换">
+                    <DropDownButton.Content>
+                        <FontIcon Glyph="{Binding SelectedModeIcon}" />
+                    </DropDownButton.Content>
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem
+                                Command="{Binding ModeCommand}"
+                                CommandParameter="View"
+                                Text="浏览模式">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xF271;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem
+                                Command="{Binding ModeCommand}"
+                                CommandParameter="Move"
+                                Text="移动模式">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE8B0;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem
+                                Command="{Binding ModeCommand}"
+                                CommandParameter="Pen"
+                                Text="钢笔工具">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEDFB;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem
+                                Command="{Binding ModeCommand}"
+                                CommandParameter="PenJoint"
+                                Text="节点编辑">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xF003;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+                <ToggleButton
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ToolTipService.ToolTip="吸附">
+                    <ToggleButton.Content>
+                        <FontIcon Glyph="&#xE8DC;" />
+                    </ToggleButton.Content>
+                </ToggleButton>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">

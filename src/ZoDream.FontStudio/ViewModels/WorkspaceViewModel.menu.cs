@@ -16,7 +16,8 @@ namespace ZoDream.FontStudio.ViewModels
 
         private void TapMode(string? mode)
         {
-            switch (mode)
+            SelectedMode = mode ?? "View";
+            switch (SelectedMode)
             {
                 case "Move":
                     Instance?.SwitchMode<MoveController>();

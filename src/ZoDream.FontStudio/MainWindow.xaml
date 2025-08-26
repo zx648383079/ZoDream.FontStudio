@@ -91,22 +91,26 @@
                     <MenuFlyoutSeparator />
                     <MenuFlyoutItem Command="{Binding PropertyCommand}" Text="属性" />
                     <MenuFlyoutSubItem Text="模式">
-                        <MenuFlyoutItem
+                        <RadioMenuFlyoutItem
                             Command="{Binding ModeCommand}"
                             CommandParameter="View"
+                            IsChecked="{Binding SelectedMode, Converter={StaticResource ToggleCvt}, ConverterParameter='View'}"
                             Text="浏览模式" />
-                        <MenuFlyoutItem
+                        <RadioMenuFlyoutItem
                             Command="{Binding ModeCommand}"
                             CommandParameter="Move"
+                            IsChecked="{Binding SelectedMode, Converter={StaticResource ToggleCvt}, ConverterParameter='Move'}"
                             Text="移动模式" />
-                        <MenuFlyoutItem
+                        <RadioMenuFlyoutItem
                             Command="{Binding ModeCommand}"
                             CommandParameter="Pen"
-                            Text="钢笔模式" />
-                        <MenuFlyoutItem
+                            IsChecked="{Binding SelectedMode, Converter={StaticResource ToggleCvt}, ConverterParameter='Pen'}"
+                            Text="钢笔工具" />
+                        <RadioMenuFlyoutItem
                             Command="{Binding ModeCommand}"
                             CommandParameter="PenJoint"
-                            Text="节点模式" />
+                            IsChecked="{Binding SelectedMode, Converter={StaticResource ToggleCvt}, ConverterParameter='PenJoint'}"
+                            Text="节点编辑" />
                     </MenuFlyoutSubItem>
                 </MenuBarItem>
                 <MenuBarItem Title="图层">

@@ -34,6 +34,25 @@ namespace ZoDream.FontStudio.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
+        private string _selectedMode = "Move";
+
+        public string SelectedMode {
+            get => _selectedMode;
+            set {
+                SetProperty(ref _selectedMode, value);
+                OnPropertyChanged(nameof(SelectedModeIcon));
+            }
+        }
+
+        public string SelectedModeIcon => SelectedMode switch
+        {
+            "Move" => "\uE8B0",
+            "Pen" => "\uEDFB",
+            "PenJoint" => "\uF003",
+            _ => "\uF271",
+        };
+
+
         private ObservableCollection<GlyphGroupViewModel> _glyphItems = [];
 
         public ObservableCollection<GlyphGroupViewModel> GlyphItems {
@@ -64,6 +83,8 @@ namespace ZoDream.FontStudio.ViewModels
             get => _layerItems;
             set => SetProperty(ref _layerItems, value);
         }
+
+
 
 
     }
