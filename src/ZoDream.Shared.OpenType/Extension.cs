@@ -13,7 +13,7 @@ namespace ZoDream.Shared.OpenType
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        internal static float ReadF2Dot14(this BinaryReader reader)
+        public static float ReadF2Dot14(this BinaryReader reader)
         {
             return ((float)reader.ReadInt16()) / (1 << 14); /* Format 2.14 */
         }

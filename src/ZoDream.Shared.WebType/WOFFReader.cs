@@ -6,10 +6,11 @@ using System.IO.Compression;
 using System.Linq;
 using ZoDream.Shared.Font;
 using ZoDream.Shared.IO;
+using ZoDream.Shared.OpenType;
 
 namespace ZoDream.Shared.WebType
 {
-    public class WOFFReader(EndianReader reader) : ITypefaceReader
+    public class WOFFReader(EndianReader reader) : ITypefaceReader, ITypefaceCipher
     {
         public static byte[] Signature = "wOFF"u8.ToArray();
         public WOFFReader(Stream input) : this(new EndianReader(input, EndianType.BigEndian, false))
@@ -23,20 +24,12 @@ namespace ZoDream.Shared.WebType
             var header = ReadHeader();
             var entries = ReadEntry(header).ToArray();
             var res = new Typeface();
+            var data = entries.ToCollection();
+            var serializer = new TypefaceTableSerializer(reader.BaseStream, 
+                new TypefaceSerializer(OTFReader.Converters), data, this);
             foreach (var item in entries)
             {
-                var source = new PartialStream(reader.BaseStream, item.Offset, item.CompLength);
-                Stream target;
-                if (item.OrigLength == item.CompLength)
-                {
-                    // 没加密
-                    target = source;
-                }
-                else
-                {
-                    target = new DeflateStream(source, CompressionMode.Decompress);
-                }
-                // 解 table
+                serializer.TryGet(item, out _);
             }
             return new TypefaceCollection
             {
@@ -44,23 +37,42 @@ namespace ZoDream.Shared.WebType
             };
         }
 
+        public Stream Encrypt(Stream input)
+        {
+            return input;
+        }
+
+        public Stream Decrypt(Stream input, ITypefaceTableEntry entry)
+        {
+            if (entry is not WOFFTableEntry item)
+            {
+                return new PartialStream(input, entry.Offset, entry.Length);
+            }
+            var source = new PartialStream(reader.BaseStream, item.CompressedOffset, item.CompressedLength);
+            if (item.Length == item.CompressedLength)
+            {
+                // 没加密
+                return source;
+            }
+            var ms = new MemoryStream((int)item.Length);
+            new DeflateStream(source, CompressionMode.Decompress).CopyTo(ms);
+            ms.Position = 0;
+            return ms;
+        }
+
         private IEnumerable<WOFFTableEntry> ReadEntry(WOFFFileHeader header)
         {
-            var expectedStartAt = 0L;
             for (int i = 0; i < header.NumTables; i++)
             {
                 var entry = new WOFFTableEntry()
                 {
                     Name = reader.ReadString(4),
-                    Offset = reader.ReadUInt32(),
-                    CompLength = reader.ReadUInt32(),
-                    OrigLength = reader.ReadUInt32(),
-                    OrigChecksum = reader.ReadUInt32(),
-
-                    ExpectedStartAt = expectedStartAt,
+                    CompressedOffset = reader.ReadUInt32(),
+                    CompressedLength = reader.ReadUInt32(),
+                    Length = reader.ReadUInt32(),
+                    OriginalChecksum = reader.ReadUInt32(),
                 };
                 yield return entry;
-                expectedStartAt += entry.OrigLength;
             }
         }
 
@@ -92,6 +104,6 @@ namespace ZoDream.Shared.WebType
             reader.Dispose();
         }
 
-
+ 
     }
 }

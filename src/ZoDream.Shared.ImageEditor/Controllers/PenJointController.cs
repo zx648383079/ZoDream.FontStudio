@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 using System.Collections.Generic;
-using System.Linq;
 using ZoDream.Shared.ImageEditor.Layers;
 using ZoDream.Shared.ImageEditor.Sources;
 
@@ -37,7 +36,7 @@ namespace ZoDream.Shared.ImageEditor.Controllers
                 return;
             }
             var index = _layer.NearOf(args.Position, editor.Options.JointSize / 2);
-            if (index >= 0)
+            if (index >= 0 && !_selected.Contains(index))
             {
                 _selected = [index];
             }

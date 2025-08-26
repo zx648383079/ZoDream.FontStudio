@@ -5,21 +5,23 @@ namespace ZoDream.Shared.WebType
     public class WOFFTableEntry : ITypefaceTableEntry
     {
         public string Name { get; set; }
-        public uint Offset;
-        public uint CompLength;
-        public uint OrigLength;
-        public uint OrigChecksum;
 
-        public long ExpectedStartAt { get; set; }
+        public long Offset { get; set; }
+
+        public long Length { get; set; }
+
+        public uint CompressedOffset;
+        public uint CompressedLength;
+        public uint OriginalChecksum;
         /// <summary>
-        /// woff2
+        /// woff2 指示是否经过数据预处理
         /// </summary>
         public byte PreprocessingTransformation { get; set; }
+        /// <summary>
+        /// woff2 未转换之前的长度
+        /// </summary>
+        public long OriginalLength { get; set; }
 
-        public uint TransformLength { get; set; }
 
-        long ITypefaceTableEntry.Offset => throw new System.NotImplementedException();
-
-        public long Length => throw new System.NotImplementedException();
     }
 }

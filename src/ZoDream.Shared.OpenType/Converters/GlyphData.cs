@@ -76,7 +76,7 @@ namespace ZoDream.Shared.OpenType.Converters
             return res;
         }
 
-        private GlyphData ReadCompositeGlyph(GlyphData[] createdGlyphs, GlyphLocationsTable locations,   BinaryReader reader, uint tableOffset, ushort compositeGlyphIndex)
+        private GlyphData ReadCompositeGlyph(GlyphData[] createdGlyphs, GlyphLocationsTable locations,  BinaryReader reader, uint tableOffset, ushort compositeGlyphIndex)
         {
             reader.BaseStream.Seek(tableOffset + locations.Offsets[compositeGlyphIndex], SeekOrigin.Begin);//reset
             //------------------------
@@ -327,7 +327,7 @@ namespace ZoDream.Shared.OpenType.Converters
             return finalGlyph ?? GlyphData.Empty;
         }
 
-        private static void TtfAppendGlyph(GlyphData dest, GlyphData src)
+        protected static void TtfAppendGlyph(GlyphData dest, GlyphData src)
         {
             int org_dest_len = dest.EndPoints.Length;
 #if DEBUG
@@ -368,7 +368,7 @@ namespace ZoDream.Shared.OpenType.Converters
             dest.Bounds = new GlyphBound(newXmin, newYMin, newXMax, newYMax);
         }
 
-        private static void TtfOffsetXY(GlyphData glyph, short dx, short dy)
+        protected static void TtfOffsetXY(GlyphData glyph, short dx, short dy)
         {
             //change data on current glyph
             var glyphPoints = glyph.GlyphPoints;
@@ -385,7 +385,7 @@ namespace ZoDream.Shared.OpenType.Converters
                (short)(orgBounds.YMax + dy));
         }
 
-        private static void TtfTransformWith2x2Matrix(GlyphData glyph, float m00, float m01, float m10, float m11)
+        protected static void TtfTransformWith2x2Matrix(GlyphData glyph, float m00, float m01, float m10, float m11)
         {
             float new_xmin = 0;
             float new_ymin = 0;
@@ -404,7 +404,7 @@ namespace ZoDream.Shared.OpenType.Converters
                 glyphPoints[i] = new GlyphPoint(
                    newX = (float)Math.Round((x * m00) + (y * m10)),
                    newY = (float)Math.Round((x * m01) + (y * m11)),
-                   p.onCurve);
+                   p.OnCurve);
 
                 //short newX = xs[i] = (short)Math.Round((x * m00) + (y * m10));
                 //short newY = ys[i] = (short)Math.Round((x * m01) + (y * m11));
@@ -433,7 +433,7 @@ namespace ZoDream.Shared.OpenType.Converters
                (short)new_xmax, (short)new_ymax);
         }
 
-        private static GlyphData TtfOutlineGlyphClone(GlyphData original, ushort newGlyphIndex)
+        protected static GlyphData TtfOutlineGlyphClone(GlyphData original, ushort newGlyphIndex)
         {
             return new GlyphData(
               [..original.GlyphPoints],

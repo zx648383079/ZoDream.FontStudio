@@ -8,7 +8,7 @@ namespace ZoDream.Shared.OpenType
     public class OTFReader(EndianReader reader) : TTFReader(reader)
     {
 
-        public static ITypefaceConverter[] Converters = [
+        public static TypefaceConverterCollection Converters = [
             new AxisVariationsConverter(),
             new BaseConverter(),
             new BitmapSizeConverter(),

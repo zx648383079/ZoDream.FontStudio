@@ -3,9 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
 using ZoDream.Shared.Font;
 using ZoDream.Shared.IO;
+using ZoDream.Shared.OpenType;
+using ZoDream.Shared.OpenType.Converters;
 using ZoDream.Shared.OpenType.Tables;
 
 namespace ZoDream.Shared.WebType
@@ -13,6 +14,63 @@ namespace ZoDream.Shared.WebType
     public partial class WOFF2Reader(EndianReader reader) : ITypefaceReader
     {
         public static byte[] Signature = "wOF2"u8.ToArray();
+
+        public static TypefaceConverterCollection Converters = [
+            new AxisVariationsConverter(),
+            new BaseConverter(),
+            new BitmapSizeConverter(),
+            new CharacterGlyphMappingConverter(),
+            new ColorConverter(),
+            new ColorBitmapDataConverter(),
+            new ColorBitmapLocationConverter(),
+            new ColorPaletteConverter(),
+            new CompactFontFormatConverter(),
+            new CompactFontFormat2Converter(),
+            new ControlValueConverter(),
+            new ControlValueProgramConverter(),
+            new CoverageConverter(),
+            new CVTVariationsConverter(),
+            new DigitalSignatureConverter(),
+            new EmbeddedBitmapDataConverter(),
+            new EmbeddedBitmapLocationConverter(),
+            new EmbeddedBitmapScalingConverter(),
+            new FontProgramConverter(),
+            new FontVariationsConverter(),
+            new Converters.GlyphDataConverter(),
+            new Converters.GlyphLocationsConverter(),
+            new GlyphDefinitionConverter(),
+            new GlyphPositioningConverter(),
+            new GlyphSubstitutionConverter(),
+            new GlyphVariationsConverter(),
+            new GridFittingScanConversionProcedureConverter(),
+            new HeadConverter(),
+            new HorizontalDeviceMetricsConverter(),
+            new HorizontalHeaderConverter(),
+            new HorizontalMetricsConverter(),
+            new HorizontalMetricsVariationsConverter(),
+            new IndexSubConverter(),
+            new JustificationConverter(),
+            new KernConverter(),
+            new LinearThresholdConverter(),
+            new MathConverter(),
+            new MaxProfileConverter(),
+            new MergeConverter(),
+            new MetaConverter(),
+            new MetricsConverter(),
+            new MetricsVariationsConverter(),
+            new NameConverter(),
+            new OS2Converter(),
+            new Pcl5Converter(),
+            new PostConverter(),
+            new StandardBitmapGraphicsConverter(),
+            new StyleAttributesConverter(),
+            new SvgConverter(),
+            new VerticalDeviceMetricsConverter(),
+            new VerticalHeaderConverter(),
+            new VerticalMetricsConverter(),
+            new VerticalMetricsVariationsConverter(),
+            new VerticalOriginConverter(),
+        ];
 
         public WOFF2Reader(Stream input) : this(new EndianReader(input, EndianType.BigEndian, false))
         {
@@ -26,8 +84,16 @@ namespace ZoDream.Shared.WebType
             var res = new Typeface();
             var header = ReadHeader();
             var entries = ReadEntry(header).ToArray();
+            using var ms = new MemoryStream();
             new BrotliStream(new PartialStream(reader.BaseStream, header.TotalCompressedSize), 
-                CompressionMode.Decompress);
+                CompressionMode.Decompress).CopyTo(ms);
+            ms.Position = 0;
+            var data = entries.ToCollection();
+            var serializer = new TypefaceTableSerializer(ms, new TypefaceSerializer(OTFReader.Converters), data);
+            foreach (var item in entries)
+            {
+                serializer.TryGet(item, out _);
+            }
             return new TypefaceCollection
             {
                 res
@@ -45,20 +111,17 @@ namespace ZoDream.Shared.WebType
                 {
                     Name = (knowTable < 63) ? _knownTableTags[knowTable] : reader.ReadString(4),
                     PreprocessingTransformation = (byte)((flags >> 5) & 0x3),
-                    ExpectedStartAt = expectedStartAt,
-                    OrigLength = reader.Read7BitEncodedUInt(),
+                    Offset = expectedStartAt,
+                    Length = reader.Read7BitEncodedUInt(),
                 };
                 if (entry.PreprocessingTransformation == 0 && entry.Name is GlyphDataTable.TableName or GlyphLocationsTable.TableName)
                 {
-                    entry.TransformLength = reader.Read7BitEncodedUInt();
-                    expectedStartAt += entry.TransformLength;
-                }
-                else
-                {
-                    expectedStartAt += entry.OrigLength;
+                    entry.OriginalLength = entry.Length;
+                    // 预处理长度和原始长度
+                    entry.Length = reader.Read7BitEncodedUInt();
                 }
                 yield return entry;
-                
+                expectedStartAt += entry.Length;
             }
         }
 

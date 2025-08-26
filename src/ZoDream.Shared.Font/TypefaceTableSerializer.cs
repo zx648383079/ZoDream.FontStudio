@@ -10,7 +10,8 @@ namespace ZoDream.Shared.Font
     public class TypefaceTableSerializer(
         Stream input,
         ITypefaceSerializer serializer,
-        ITypefaceTableCollection tables
+        ITypefaceTableCollection tables,
+        ITypefaceCipher? cipher = null
         ) : ITypefaceTableSerializer
     {
 
@@ -53,8 +54,9 @@ namespace ZoDream.Shared.Font
                 result = default;
                 return false;
             }
+            var nextStream = cipher is null ? new PartialStream(input, u.Entry.Offset, u.Entry.Length) : cipher.Decrypt(input, u.Entry);
             var reader = new EndianReader(
-                new PartialStream(input, u.Entry.Offset, u.Entry.Length),
+                nextStream,
                 EndianType.BigEndian);
             var interfaceType = cvt.GetType().GetInterfaces()
                 .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ITypefaceTableConverter<>));
@@ -69,6 +71,10 @@ namespace ZoDream.Shared.Font
             else
             {
                 result = cvt.Read(reader, targetType, serializer);
+            }
+            if (nextStream is not PartialStream)
+            {
+                nextStream.Dispose();
             }
             if (result is null)
             {

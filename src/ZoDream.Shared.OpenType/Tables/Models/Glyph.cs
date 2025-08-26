@@ -4,16 +4,16 @@ namespace ZoDream.Shared.OpenType.Tables
 {
     public class GlyphData
     {
-        internal static readonly GlyphData Empty = new([], [], GlyphBound.Zero, null, 0);
+        public static readonly GlyphData Empty = new([], [], GlyphBound.Zero, null, 0);
         public ushort GlyphIndex { get; }                       //FOUND in all mode
-        public GlyphBound Bounds { get; internal set; }             //FOUND in all mode
+        public GlyphBound Bounds { get; set; }             //FOUND in all mode
         public ushort OriginalAdvanceWidth { get; set; } //FOUND in all mode
         internal ushort BitmapGlyphAdvanceWidth { get; set; }    //FOUND in all mode
 
         //TrueTypeFont
         public ushort[] EndPoints { get; set; }         //NULL in  _onlyLayoutEssMode         
         public GlyphPoint[] GlyphPoints { get; set; }  //NULL in  _onlyLayoutEssMode         
-        internal byte[] GlyphInstructions { get; set; }         //NULL in _onlyLayoutEssMode 
+        public byte[] GlyphInstructions { get; set; }         //NULL in _onlyLayoutEssMode 
         public bool HasGlyphInstructions => GlyphInstructions != null; //FALSE  n _onlyLayoutEssMode 
 
         //
@@ -26,7 +26,7 @@ namespace ZoDream.Shared.OpenType.Tables
         public uint StreamLen;            //FOUND in all mode (if font has this data)
         public ushort ImgFormat;          //FOUND in all mode (if font has this data)
 
-        internal GlyphData(
+        public GlyphData(
             GlyphPoint[] glyphPoints,
             ushort[] contourEndPoints,
             GlyphBound bounds,

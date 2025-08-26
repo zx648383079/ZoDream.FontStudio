@@ -8,6 +8,6 @@ namespace ZoDream.Shared.OpenType.Tables
 
         public string Name => TableName;
 
-        public GlyphData[] Glyphs { get; internal set; }
+        public GlyphData[] Glyphs { get; set; }
     }
 }

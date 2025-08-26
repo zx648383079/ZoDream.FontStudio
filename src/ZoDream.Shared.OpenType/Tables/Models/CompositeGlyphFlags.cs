@@ -3,7 +3,7 @@
 namespace ZoDream.Shared.OpenType.Tables
 {
     [Flags]
-    internal enum CompositeGlyphFlags : ushort
+    public enum CompositeGlyphFlags : ushort
     {
         ARG_1_AND_2_ARE_WORDS = 1,
         ARGS_ARE_XY_VALUES = 1 << 1,
